@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="MyVote">
-    <h4 class="vote-count">{{totalVotes}}</h4>
+    <h4 class="vote-count">{{remainingVotes}}</h4>
     <div class="progress-bar">
         <progress :value= "remainingVotes" :max="totalVotes"></progress>
     </div>
@@ -16,7 +16,6 @@
       remainingVotes: Number
     },
     setup() {
-
       onUpdated(() => {
         console.log('updated!')
       })

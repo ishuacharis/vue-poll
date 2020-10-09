@@ -1,9 +1,9 @@
 <template lang="html">
-  <Housemate v-for="houseMate in houseMates"
-      :houseMate= "houseMate"
-      :incrementVote="incrementVote"
-      :decrementVote="decrementVote"
-      :key="houseMate.name" />
+  <div class="housemates">
+    <Housemate v-for="houseMate in houseMates"
+    :houseMate= "houseMate"
+    :key="houseMate.name" />
+  </div>
 </template>
 
 <script>
@@ -15,12 +15,8 @@
     },
     props: {
       houseMates: Array,
-      incrementVote: Function,
-      decrementVote: Function,
     },
   }
 </script>
 
-<style lang="css" scoped>
-  @import 'Housemates.css'
-</style>
+<style lang="css" scoped src="./Housemates.css"></style>

@@ -6,6 +6,7 @@ export default function() {
   const remainingvotes = ref(totalVotes)
   const votesLeft  = ref(totalVotes)
   const setRemainingVotes = (command) => {
+    console.log(command)
     if(command === 'increase') return remainingvotes.value -= 10
     if(command === 'decrease') return remainingvotes.value += 10
   }
