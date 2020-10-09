@@ -35,7 +35,13 @@ const themes  =  {
 }
 
 const getUser =  (screen_name) => {
-  return  houseMatesUpForEviction.find(housemate => housemate.name === screen_name)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(houseMatesUpForEviction.find(housemate => housemate.name === screen_name))
+        reject("Failure")
+      }, 3000)
+    })
+
 }
 
 
