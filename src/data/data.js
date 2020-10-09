@@ -34,6 +34,9 @@ const themes  =  {
     }
 }
 
+const getUser =  (screen_name) => {
+  return  houseMatesUpForEviction.find(housemate => housemate.name === screen_name)
+}
 
 
-export {totalVotes, houseMatesUpForEviction,themes,}
+export {totalVotes, houseMatesUpForEviction,themes,getUser}

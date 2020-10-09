@@ -4,7 +4,9 @@
       <img :src="houseMate.avatar" alt="" />
     </div>
     <div>
-      <h4 class="name">{{houseMate.name}}</h4>
+      <h4 class="name">
+        <router-link class="link" :to="{name: 'Housemate', params: {screen_name: houseMate.name}}">{{houseMate.name}}</router-link>
+      </h4>
       <div class="controls">
         <div class="control" @click="onVoteIncrement">
           <span>+</span>
@@ -45,6 +47,4 @@
   }
 </script>
 
-<style lang="css" scoped>
-  @import 'Housemate.css'
-</style>
+<style lang="css" scoped src="./Housemate.css"></style>

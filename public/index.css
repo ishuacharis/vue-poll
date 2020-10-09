@@ -14,13 +14,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+a{
+  text-decoration: none;
+}
 img {
   max-width: 100%;
   max-height: 100%;
-  width: 100%;
   height: 100%;
+  width: 100%;
   object-fit: cover;
+  display: block;
 }
 
 input {
@@ -39,4 +42,5 @@ input[disabled] {
   width: 100%;
   margin: 0 auto;
   max-width: 96rem;
+  position: relative
 }
