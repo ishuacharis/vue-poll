@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-color="green">
     <MyVote
       :totalVotes= "totalvotes"
       :remainingVotes= "remainingvotes"/>
@@ -29,13 +29,15 @@
 </template>
 
 <script>
-  //import {watchEffect,onMounted} from 'vue'
+  import {ref} from 'vue'
   import {useRoute, useRouter} from 'vue-router'
   import {getUser} from '@/data/data'
   import VoteContext from '@/Context/VoteContext.js'
+
   import MyVote from '@/components/MyVote/MyVote.vue'
   export default {
     name: 'People',
+    inject: ['VoteContext'],
     components: {
       MyVote
     },
@@ -43,9 +45,7 @@
       window.route = useRoute()
       window.router = useRouter()
       const {params : {screen_name}} = useRoute()
-      const user = await getUser(screen_name) //ref(getUser(screen_name))
-      console.log(user)
-
+      const user = ref(await getUser(screen_name))
 
       const {
         totalvotes, remainingvotes,
@@ -54,25 +54,19 @@
       } = VoteContext()
 
       const onVoteIncre = () => {
-        onVoteIncrement(user)
+        onVoteIncrement(user.value)
       }
       const onVoteDecre = ()  => {
-        onVoteDecrement(user)
+        onVoteDecrement(user.value)
       }
 
-      // onMounted( () => {
-      //   console.log(screen_name)
-      // })
-      // watchEffect(() => screen_name, () =>{
-      //   console.log(screen_name)
-      // })
 
       return  {
         user,
         totalvotes,
         remainingvotes,
         onVoteIncre,
-        onVoteDecre
+        onVoteDecre,
       }
     }
   }

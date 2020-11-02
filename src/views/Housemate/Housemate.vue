@@ -29,8 +29,9 @@
        onErrorCaptured(e => {
          error.value = e
        })
+
        return {
-         error
+         error,
        }
      }
   }

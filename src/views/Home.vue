@@ -1,25 +1,35 @@
 <template>
-  <div class="container">
-    <Project />
+  <div className = "home">
+    <div class="container">
+      <nav class="nav">
+        <ul class="navLinks">
+          <li class="navItem">
+            <router-link to="/" class="navLink">Home</router-link>
+          </li>
+          <li>
+            <router-link to="/testing" class="navLink">Testing</router-link>
+          </li>
+          <li>
+            <router-link to="/housemates" class="navLink">Projects</router-link>
+          </li>
+          <li>
+            <router-link to="/gallery" class="navLink">Gallery</router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Project from '@/components/Project/Project.vue'
+
 export default {
   name: 'Home',
-  components: {
-    Project
-  }
+
 }
 </script>
 
 
 <style>
-  .container {
-    width: 100;
-    max-width: 100rem;
-    padding: 0 2rem;
-  }
+
 </style>

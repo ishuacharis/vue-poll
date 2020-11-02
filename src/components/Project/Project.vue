@@ -10,17 +10,16 @@
   import Housemates from '@/components/Housemates/Housemates'
   export default {
     name: 'Project',
+
     components: {
       Housemates
     },
     setup() {
-      const {
-            houseMates,
-          } = VoteContext()
+      const {houseMates,} = VoteContext()
       return {
         houseMates,
       }
-    }
+    },
   }
 </script>
 

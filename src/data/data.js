@@ -41,7 +41,6 @@ const getUser =  (screen_name) => {
         reject("Failure")
       }, 3000)
     })
-
 }
 
 

@@ -2,6 +2,7 @@
 node_modules
 /dist
 src/views/Testing/
+src/ProvideInject/
 
 
 # local env files

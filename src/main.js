@@ -1,5 +1,18 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+
+app
+.directive('color', {
+  mounted(el, binding) {
+    const color  = binding.value || 'red'
+    console.log(color)
+    el.style.backgroundColor = color
+  }
+})
+.use(router)
+.use(store)
+.mount('#app')
