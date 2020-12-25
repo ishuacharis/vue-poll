@@ -1,5 +1,5 @@
 export default function() {
-  const KEY = ""
+  const KEY = process.env.VUE_APP_PIXABAY_KEY
   const PREFIXURL =  "https://pixabay.com/api/?key="
   const SUFFIXURL =  "&per_page=6"
 

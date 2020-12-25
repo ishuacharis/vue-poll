@@ -38,22 +38,22 @@ export default {
   name: 'Photos',
   components: {Photo, ErrorBoundary},
   async setup() {
-  const {getPhotos} = PixabayContext()
-  const photos = ref(null)
+    const {getPhotos} = PixabayContext()
+    const photos = ref(null)
 
 
-    try {
-      photos.value  = await getPhotos()
-    } catch (e) {
-      console.log(`the error is ${e} from photos component`)
-    }
+      try {
+        photos.value  = await getPhotos()
+      } catch (e) {
+        console.log(`the error is ${e} from photos component`)
+      }
 
-    const photosGet = async (queryString) => {
-      photos.value = await getPhotos(queryString)
-    }
+      const photosGet = async (queryString) => {
+        photos.value = await getPhotos(queryString)
+      }
 
 
-    return  {photos, getPhotos, photosGet}
+      return  {photos, getPhotos, photosGet}
   }
 
 }
