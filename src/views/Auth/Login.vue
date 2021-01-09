@@ -7,17 +7,23 @@
         <span class="or">OR</span>
         <span class="line right"></span>
       </div>
-      <Form @submit="onFormSubmit" :validation-schema="loginSchema" v-slot="{ errors }">
+      <Form 
+        @submit="onFormSubmit" 
+        :validation-schema="loginSchema" 
+        v-slot="{ errors , isSubmitting, }"
+        >
         <div class="field__content">
-          <InputField name="email" type="email" placeholder="Email" :error="errors.email"  />
-          <InputField name="password" type="password"  placeholder="Password" :error="errors.password" />
+          <InputField name="email" type="email" placeholder="Email" :error="errors" />
+          <InputField name="password" type="password"  placeholder="Password" 
+          :error="errors" />
+          
         </div>
         <div class="link">
           <router-link to="#" class="link-item">Forgot password?</router-link>
           <router-link :to="{path: '/auth', query: {a: 'register'}}" class="link-item">Dont have an account?</router-link>
         </div>
         <div class="field">
-            <button class="btn">Login</button>
+            <button class="btn" :disabled="isSubmitting">Login</button>
         </div>
       </Form>
     </div>
@@ -33,10 +39,10 @@
   const {login} = routes()
   const {loginSchema} = schema()
   export default {
-    components: {Form,InputField},
+    components: {Form,InputField,},
     setup(){
       
-      const onFormSubmit = async (values) => {
+      const onFormSubmit = async (values, {resetForm}) => {
         const data = {
           email: values.email,
           password: values.password
@@ -46,11 +52,12 @@
           "method":  "POST",
           "body":  data
           };
-        
+          resetForm()
         const response = await login(args)
         console.log(response)
+
       }
-      
+
       
       return {
         loginSchema, onFormSubmit,

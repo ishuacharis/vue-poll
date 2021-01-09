@@ -1,10 +1,11 @@
 <template lang="html">
     <div class="field">
-        <Field 
+        <Field v-slot="{valid}"
             :name="props.name" 
             :type="props.type" 
             class="input" 
-            :placeholder="props.placeholder" />
+            :placeholder="props.placeholder" 
+            :disabled="valid"/>
         <ErrorMessage :name="props.name" class="error" />
     </div>
 </template>
@@ -20,7 +21,7 @@
             placeholder: String,
             type: String,
             name: String,
-            error: String
+            error: Object,
         },
         setup(props) {
             return {props}

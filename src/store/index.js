@@ -1,11 +1,17 @@
 import { createStore } from 'vuex'
-
+import { getters } from './global/getters';
+import { actions }  from './global/actions';
+import { mutations } from './global/mutations';
 const store = createStore({
-  state() {
+  state: () => {
     return {
-      count: 1
+      count: 4,
+      todos: ["running"]
     }
-  }
+  },
+  getters: getters,
+  mutations: mutations,
+  actions: actions
 })
 
 

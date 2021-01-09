@@ -14,6 +14,8 @@ export default function() {
         email: Yup.string()
         .email("Email is invalid")
         .required('Field is required'),
+        username: Yup.string()
+        .required('Field is required'),
         password: Yup.string()
         .required("Field is required")
         .min(4, "Password should be atleast 4 characters")
