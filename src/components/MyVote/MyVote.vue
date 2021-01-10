@@ -13,7 +13,7 @@
     name: 'MyVote',
     props : {
       totalVotes : Number,
-      remainingVotes: Number
+      remainingVotes: Number 
     },
     setup() {
       onUpdated(() => {

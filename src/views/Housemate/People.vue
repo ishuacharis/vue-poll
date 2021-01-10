@@ -29,42 +29,43 @@
 </template>
 
 <script>
-  import {ref} from 'vue'
-  import {useRoute, useRouter} from 'vue-router'
-  import {getUser} from '@/data/data'
-  import VoteContext from '@/Context/VoteContext.js'
+  import {ref, computed} from 'vue';
+  import { useStore } from 'vuex';
+  import {useRoute, useRouter} from 'vue-router';
+  import {getUser} from '@/data/data';
 
-  import MyVote from '@/components/MyVote/MyVote.vue'
+  import MyVote from '@/components/MyVote/MyVote.vue';
   export default {
     name: 'People',
     inject: ['VoteContext'],
     components: {
       MyVote
     },
-     async setup() {
+     async setup() { 
+      const store = useStore();
       window.route = useRoute()
       window.router = useRouter()
       const {params : {screen_name}} = useRoute()
       const user = ref(await getUser(screen_name))
 
-      const {
-        totalvotes, remainingvotes,
-        onVoteIncrement,
-        onVoteDecrement
-      } = VoteContext()
-
       const onVoteIncre = () => {
-        onVoteIncrement(user.value)
+        store.dispatch({
+          type: 'votes/onVoteIncrement',
+          housemate: user.value
+        })
       }
       const onVoteDecre = ()  => {
-        onVoteDecrement(user.value)
+        store.dispatch({
+          type: 'votes/onVoteDecrement',
+          housemate: user.value
+        })
       }
 
-
+      
       return  {
         user,
-        totalvotes,
-        remainingvotes,
+        totalvotes: computed(() => store.getters['votes/totalVotes']),
+        remainingvotes: computed(() => store.getters['votes/remainingVotes']),
         onVoteIncre,
         onVoteDecre,
       }

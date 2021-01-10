@@ -6,8 +6,9 @@
 
 <script>
 
-  import VoteContext from '../../Context/VoteContext.js'
-  import Housemates from '@/components/Housemates/Housemates'
+  import { computed } from 'vue';
+  import { useStore } from 'vuex';
+  import Housemates from '@/components/Housemates/Housemates';
   export default {
     name: 'Project',
 
@@ -15,9 +16,9 @@
       Housemates
     },
     setup() {
-      const {houseMates,} = VoteContext()
+      const store =  useStore();
       return {
-        houseMates,
+        houseMates: computed(() => store.getters['votes/houseMates']),
       }
     },
   }

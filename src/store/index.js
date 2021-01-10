@@ -2,16 +2,17 @@ import { createStore } from 'vuex'
 import { getters } from './global/getters';
 import { actions }  from './global/actions';
 import { mutations } from './global/mutations';
+import { state } from './global/state'
+import voteModule from './vote';
+
 const store = createStore({
-  state: () => {
-    return {
-      count: 4,
-      todos: ["running"]
-    }
-  },
+  state: state,
   getters: getters,
   mutations: mutations,
-  actions: actions
+  actions: actions,
+  modules: {
+    votes: voteModule
+  }
 })
 
 
