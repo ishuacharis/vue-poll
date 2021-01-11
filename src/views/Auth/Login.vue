@@ -36,17 +36,19 @@
 </template>
  
 <script>
-  //import {ref} from  'vue'
-  import {Form,} from  'vee-validate'
-  import InputField from '@/components/shared/InputField'
-  import schema from '@/schema'
-  import routes from '@/routes'
-  const {login} = routes()
-  const {loginSchema} = schema()
+  import { useRouter} from  'vue-router';
+  import {Form,} from  'vee-validate';
+  import InputField from '@/components/shared/InputField';
+  import schema from '@/schema';
+  import routes from '@/routes';
+  import { setUser } from '@/helpers';
   export default {
     components: {Form,InputField,},
     setup(){
-      
+      const {login} = routes();
+      const {loginSchema} = schema();
+      const router  = useRouter();
+      window.router  = useRouter();
       const onFormSubmit = async (values, {resetForm}) => {
         const data = {
           email: values.email,
@@ -58,8 +60,15 @@
           "body":  data
           };
           resetForm()
-        const response = await login(args)
-        console.log(response)
+        try {
+          const response = await login(args)
+          if('response' in response) {
+             setUser(response);
+             router.push('/housemates');
+          }
+        } catch (e) {
+          console.log(`error is ${e}`)
+        }
 
       }
 

@@ -1,3 +1,4 @@
+import { authUserGuard, guestGuard } from './guards/route_guards';
 import { createRouter, createWebHistory } from 'vue-router'
 import NotFound  from '../views/NotFound'
 
@@ -33,7 +34,9 @@ const routes = [
   {
     path: '/housemates',
     name: 'Housemates',
-    component: Housemates
+    component: Housemates,
+    beforeEnter: authUserGuard,
+    meta: {requiresAuth: true}
   },
   {
     path: '/housemate/:screen_name',
@@ -48,9 +51,15 @@ const routes = [
   {
     path: '/auth',
     name: 'Auth',
-    
     component: Auth,
+    beforeEnter: guestGuard,
+    meta: { guest: true }
   },
+  // {
+  //   path: '/auth?a=login',
+  //   name: 'Auth',
+  //   component: Auth,
+  // },
   {
     path: '/**',
     name: 'NotFound',

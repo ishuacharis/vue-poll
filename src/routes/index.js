@@ -1,4 +1,5 @@
 export default function() {
+    
     const BASE_URI = "http://localhost:8000/api";
     const headers = {
         headers: {
@@ -20,7 +21,7 @@ export default function() {
         return await fetch(uri,options)
         .then(res => res.json())
         .then(res => res)
-        .catch(err => console.log(err))
+        .catch(err => err)
     }
 
     const register = async (args) => {
