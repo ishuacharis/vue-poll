@@ -40,7 +40,26 @@ export default function() {
         .catch(err => console.log(err))
     }
 
+    const logout = async (args) =>  {
+        const endPoint  = args["endPoint"];
+        const method =  args["method"];
+        const authorization = `Bearer ${args["token"]}`;
+
+        headers["headers"]["Authorization"] = authorization;
+        const uri = BASE_URI+endPoint;
+        console.log(headers)
+        const options = {
+            method: method,
+            headers: headers["headers"]
+        };
+        
+        return await fetch(uri, options)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => console.log(err))
+    }
+
     return {
-        login,register
+        login,register, logout
     }
 }

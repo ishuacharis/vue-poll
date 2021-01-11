@@ -8,6 +8,10 @@ const setUser = (args) => {
     localStorage.setItem(USER, JSON.stringify(args))
 }
 
+const deleteUser =  () => {
+    localStorage.removeItem(USER);
+}
+
 const isLoggedIn = () => {
     const user  = fetchUser(USER);
 
@@ -16,4 +20,9 @@ const isLoggedIn = () => {
     return user;
 };
 
-export { isLoggedIn , setUser };
+const getToken = () => {
+    const user = fetchUser(USER);
+    return user["response"]["token"];
+}
+
+export { isLoggedIn , setUser, getToken, deleteUser };

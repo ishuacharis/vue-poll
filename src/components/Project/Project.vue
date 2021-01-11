@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="project">
+    <SideNav />
     <Housemates :houseMates="houseMates" />
   </div>
 </template>
@@ -8,12 +9,13 @@
 
   import { computed } from 'vue';
   import { useStore } from 'vuex';
+  import SideNav from '@/components/shared/Navbar/SideNav';
   import Housemates from '@/components/Housemates/Housemates';
   export default {
     name: 'Project',
 
     components: {
-      Housemates
+      Housemates, SideNav
     },
     setup() {
       const store =  useStore();
@@ -24,5 +26,5 @@
   }
 </script>
 
-<style lang="css" scoped>
+<style lang="css" src="./Project.css" scoped>
 </style>

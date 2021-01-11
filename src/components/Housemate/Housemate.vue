@@ -1,8 +1,12 @@
 <template lang="html">
   <div class="housemate">
-    <router-link :to="{name: 'Housemate', params: {screen_name: houseMate.name} }" class="avatar">
-        <img :src="houseMate.avatar" alt="" />
+    <router-link 
+      :to="{name: 'Housemate', 
+      params: {screen_name: houseMate.name} }" 
+      class="avatar avatar-large">
+      <img :src="houseMate.avatar" alt="" />
     </router-link>
+    
   </div>
 </template>
 

@@ -8,7 +8,7 @@ const app = createApp(App)
 app
 .directive('color', {
   mounted(el, binding) {
-    const color  = binding.value || 'red'
+    const color  = binding.value || 'gray'
     console.log(color)
     el.style.backgroundColor = color
   }

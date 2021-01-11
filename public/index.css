@@ -39,6 +39,10 @@ input[disabled] {
   text-align: center;
 }
 
+a{
+  text-decoration: none;
+}
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -137,10 +141,10 @@ input[disabled] {
   border-top-color: hotpink;
   border-radius: 100%;
   /* -webkit-animation: loadings 4s infinite linear; */
-  animation: loadings 1s infinite linear;
+  animation: loading 1s infinite linear;
 }
 
-@keyframes loadings {
+@keyframes loading {
   from{
     /* -webkit-transform: rotate(0deg); */
     transform: rotate(0deg);

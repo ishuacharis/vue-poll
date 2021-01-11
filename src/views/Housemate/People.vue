@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-color="green">
+  <div class="project" v-color="green">
     <MyVote
       :totalVotes= "totalvotes"
       :remainingVotes= "remainingvotes"/>
@@ -16,7 +16,7 @@
             <span>+</span>
           </div>
           <div class="control">
-            <input type="text" value="0" disabled  />
+            <input type="text" :value="user.voteCount" disabled  />
           </div>
           <div class="control" @click="onVoteDecre">
             <span>-</span>
