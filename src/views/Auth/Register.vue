@@ -1,24 +1,30 @@
 <template lang="html">
   <div class = "auth__container">
       <div class="auth__content">
-        <div class="auth__socials"></div>
-        <div class="divider">
-          <span class="line left"></span>
-          <span class="or">OR</span>
-          <span class="line right"></span>
+        <div class="auth">
+          <div class="auth__socials"></div>
+          <div class="divider">
+            <span class="line left"></span>
+            <span class="or">OR</span>
+            <span class="line right"></span>
+          </div>
+          <Form 
+            @submit="onFormSubmit" 
+            :validation-schema="registerSchema" 
+            v-slot="{ errors, isSubmitting, meta: {dirty, touched} }">
+            <div class="field__content">
+              <InputField name="email" type="email" placeholder="Email" :error="errors" />
+              <InputField name="password" type="password"  placeholder="Password" :error="errors" />
+            </div>
+            <div class="link">
+              <router-link :to="{path: '/auth', query: {a: 'login'}}" class="link-item">Already have an account?</router-link>
+            </div>
+            <div class="field">
+                <button class="btn" :disabled="!(dirty && touched) || isSubmitting">Login</button>
+            </div>
+          </Form>
+
         </div>
-        <Form @submit="onFormSubmit" :validation-schema="registerSchema">
-          <div class="field__content">
-            <InputField name="email" type="email" placeholder="Email" :error="errors.email" />
-            <InputField name="password" type="password"  placeholder="Password" :error="errors.password" />
-          </div>
-          <div class="link">
-            <router-link :to="{path: '/auth', query: {a: 'login'}}" class="link-item">Already have an account?</router-link>
-          </div>
-          <div class="field">
-              <button class="btn">Register</button>
-          </div>
-        </Form>
       </div>
     </div>
 </template>

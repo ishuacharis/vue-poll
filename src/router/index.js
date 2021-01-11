@@ -48,6 +48,7 @@ const routes = [
   {
     path: '/auth',
     name: 'Auth',
+    
     component: Auth,
   },
   {

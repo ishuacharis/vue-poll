@@ -1,5 +1,5 @@
 
-const totalVotes = 100
+const totalVotes = 100 
 const houseMatesUpForEviction = [{
         name: 'laycon',
         avatar: require("../assets/laycon.jpg"),

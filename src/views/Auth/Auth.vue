@@ -8,7 +8,7 @@
     </template>
     
   </div>
-</template>
+</template> 
 
 <script>
   import {watch, computed} from 'vue'

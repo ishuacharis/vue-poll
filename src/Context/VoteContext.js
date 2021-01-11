@@ -4,7 +4,7 @@ export default  function() {
   const totalvotes = ref(totalVotes)
   const houseMates= ref(houseMatesUpForEviction)
   const remainingvotes = ref(totalVotes)
-  const votesLeft  = ref(totalVotes)
+  const votesLeft  = ref(totalVotes) 
 
   const setRemainingVotes = (command) => {
 
