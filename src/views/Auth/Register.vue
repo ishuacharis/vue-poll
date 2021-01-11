@@ -20,7 +20,12 @@
               <router-link :to="{path: '/auth', query: {a: 'login'}}" class="link-item">Already have an account?</router-link>
             </div>
             <div class="field">
-                <button class="btn" :disabled="!(dirty && touched) || isSubmitting">Login</button>
+                <button 
+                  class="btn" 
+                  :class="{hide: isSubmitting}" 
+                  :disabled="!(dirty && touched) || isSubmitting">
+                  Login</button>
+                  <div v-if="isSubmitting" class="loading"></div>
             </div>
           </Form>
 
