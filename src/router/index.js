@@ -1,13 +1,14 @@
 import { authUserGuard, guestGuard } from './guards/route_guards';
-import { createRouter, createWebHistory } from 'vue-router'
-import NotFound  from '../views/NotFound'
+import { createRouter, createWebHistory } from 'vue-router';
+import NotFound  from '../views/NotFound';
 
-const Home = () => import("@/views/Home.vue")
-const Housemates = () => import( '@/views/Housemates/Housemates.vue')
-const Housemate = () => import('@/views/Housemate/Housemate.vue')
-const Gallery = () => import('@/views/Gallery/Gallery.vue')
-const Testing = () => import('@/views/Testing/Testing.vue')
-const Auth = () => import('@/views/Auth/Auth.vue')
+const Home = () => import("@/views/Home.vue");
+const Housemates = () => import( '@/views/Housemates/Housemates.vue');
+const Housemate = () => import('@/views/Housemate/Housemate.vue');
+const Gallery = () => import('@/views/Gallery/Gallery.vue');
+const Testing = () => import('@/views/Testing/Testing.vue');
+const Auth = () => import('@/views/Auth/Auth.vue');
+
 
 
 
@@ -55,11 +56,11 @@ const routes = [
     beforeEnter: guestGuard,
     meta: { guest: true }
   },
-  // {
-  //   path: '/auth?a=login',
-  //   name: 'Auth',
-  //   component: Auth,
-  // },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: () => import('@/views/Logout/Logout.vue'),
+  },
   {
     path: '/**',
     name: 'NotFound',

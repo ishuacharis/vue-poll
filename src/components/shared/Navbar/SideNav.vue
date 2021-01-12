@@ -18,7 +18,7 @@
             <div class="bottom">
 
                 <li class="sidenav-link">
-                    <button type="button" class="sidenav-item" @click="signOut">
+                    <router-link :to="{path: 'logout'}" class="sidenav-item" >
                         <div class="logout">
                             <div class="avatar avatar-small">
                                 <img src="@/assets/vee.jpg" />
@@ -28,7 +28,7 @@
                                 <span>@ibreaktherules</span>
                             </div>
                         </div>
-                    </button>
+                    </router-link>
                 </li>
 
             </div>
@@ -38,31 +38,11 @@
 
 
 <script>
-    import routes  from '@/routes';
-    import { getToken, deleteUser } from '@/helpers';
-    import { useRouter } from 'vue-router';
+   
     export default {
         name: 'SideNav',
         setup() {
-            const {logout} = routes();
-            const router  = useRouter();
-            const signOut =  async () => {
-                
-                let args = {
-                    endPoint: "/logout",
-                    method: 'POST',
-                    token: getToken()
-                };
-                const response = await logout(args);
-                if ('response' in response) {
-                    console.log("feedback")
-                    deleteUser();
-                    router.replace('/auth')
-                }
-            }
-            return {
-                signOut
-            }
+            
         }
     }
 
