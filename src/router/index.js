@@ -60,6 +60,8 @@ const routes = [
     path: '/logout',
     name: 'Logout',
     component: () => import('@/views/Logout/Logout.vue'),
+    beforeEnter: authUserGuard,
+    meta: { requiresAuth: true }
   },
   {
     path: '/**',

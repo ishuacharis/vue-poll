@@ -4,6 +4,7 @@ import { actions }  from './global/actions';
 import { mutations } from './global/mutations';
 import { state } from './global/state'
 import voteModule from './vote';
+import authModule from './auth';
 
 const store = createStore({
   state: state,
@@ -11,7 +12,8 @@ const store = createStore({
   mutations: mutations,
   actions: actions,
   modules: {
-    votes: voteModule
+    votes: voteModule,
+    auth: authModule
   }
 })
 

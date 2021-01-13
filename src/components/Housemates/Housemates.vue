@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Housemate from '@/components/Housemate/Housemate'
+  import Housemate from '@/components/Housemate/Housemate';
   export default {
     name: 'Housemates',
     components: {
@@ -16,7 +16,10 @@
     props: {
       houseMates: Array,
     },
-  }
+    setup() {
+     
+    }
+  };
 </script>
 
 <style lang="css" scoped src="./Housemates.css"></style>

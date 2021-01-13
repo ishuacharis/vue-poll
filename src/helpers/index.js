@@ -1,28 +1,37 @@
-const USER = "USER";
+import store from '../store';
 
-const fetchUser = (key) => {
-    return JSON.parse(localStorage.getItem(key)) || null;
-};
+const USER = "USER";
+const TOKEN = 'TOKEN';
+
 
 const setUser = (args) => {
     localStorage.setItem(USER, JSON.stringify(args))
+}
+
+const setToken  = (args) => {
+    localStorage.setItem(TOKEN, JSON.stringify(args)) 
 }
 
 const deleteUser =  () => {
     localStorage.removeItem(USER);
 }
 
-const isLoggedIn = () => {
-    const user  = fetchUser(USER);
+const deleteToken =  () => {
+    localStorage.removeItem(TOKEN);
+}
 
-    if(user == null)  return false;
 
-    return user;
+const isLoggedIn = () => {    
+    return store.getters['auth/isLoggedIn'] || false;
 };
 
 const getToken = () => {
-    const user = fetchUser(USER);
-    return user["response"]["token"];
+    
+    return store.getters['auth/token'] || false;
 }
 
-export { isLoggedIn , setUser, getToken, deleteUser };
+export { isLoggedIn , setUser, getToken, deleteUser,setToken, deleteToken };
+
+
+
+

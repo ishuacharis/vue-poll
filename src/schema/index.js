@@ -1,8 +1,12 @@
 import * as Yup from 'yup'
 export default function() {
     const registerSchema = Yup.object().shape({
+        name: Yup.string()
+        .required('Field is required'),
         email: Yup.string()
         .email("Email is invalid")
+        .required('Field is required'),
+        phoneNo: Yup.string()
         .required('Field is required'),
         password: Yup.string()
         .required("Field is required")

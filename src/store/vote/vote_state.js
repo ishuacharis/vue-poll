@@ -1,4 +1,4 @@
-import { totalVotes, houseMatesUpForEviction } from '../../data/data'
+import { totalVotes, houseMatesUpForEviction } from '../../data/data';
 
 export const voteStates = () => {
     return{
@@ -7,4 +7,4 @@ export const voteStates = () => {
         remainingVotes: totalVotes,
         votesLeft: totalVotes
     }
-}
+};

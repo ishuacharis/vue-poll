@@ -3,13 +3,13 @@ export let voteGetters = {
         return state.totalVotes;
     },
     houseMates(state){
-        return state.houseMates
+        return state.houseMates;
     },
 
     remainingVotes(state) {
-        return state.remainingVotes
+        return state.remainingVotes;
     },
     votesLeft(state) {
-        return state.votesLeft
+        return state.votesLeft;
     }
 };

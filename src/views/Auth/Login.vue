@@ -37,18 +37,19 @@
  
 <script>
   import { useRouter} from  'vue-router';
+  import { useStore } from 'vuex';
   import {Form,} from  'vee-validate';
   import InputField from '@/components/shared/InputField';
   import schema from '@/schema';
   import routes from '@/routes';
-  import { setUser } from '@/helpers';
+  import { setUser, setToken } from '@/helpers';
   export default {
     components: {Form,InputField,},
     setup(){
       const {login} = routes();
       const {loginSchema} = schema();
-      const router  = useRouter();
-      window.router  = useRouter();
+      const router = useRouter();
+      const store =  useStore() ;
       const onFormSubmit = async (values, {resetForm}) => {
         const data = {
           email: values.email,
@@ -63,7 +64,12 @@
         try {
           const response = await login(args)
           if('response' in response) {
-             setUser(response);
+             setUser(response["response"]["user"]);
+             setToken(response["response"]["token"]);
+              store.dispatch({
+                type: 'auth/login',
+                credentials: response["response"]
+              })
              router.push('/housemates');
           }
         } catch (e) {

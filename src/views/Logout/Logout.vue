@@ -2,7 +2,7 @@
     <div class="logout-container">
         <div class="modal" v-if="!isLoading">
             <h1> Log out </h1>
-            <button class="btn-cancel"> Cancel </button>
+            <button class="btn-cancel" @click="goBack"> Cancel </button>
             <button class="btn-logout" @click="signOut"> Log out </button>
         </div>
         <div class="loading" v-else></div>
@@ -13,17 +13,23 @@
 <script>
     import { ref } from 'vue';
     import routes  from '@/routes';
-    import { getToken, deleteUser } from '@/helpers';
+    import { getToken, deleteToken, deleteUser  } from '@/helpers';
     import { useRouter } from 'vue-router';
+    import { useStore } from 'vuex';
     export default {
 
         name: 'Logout',
 
         setup() {
+            const store  = useStore();
             let isLoading  =  ref(false);
             const {logout} = routes();
             const router  = useRouter();
-            const token  =  getToken();
+            const token  = JSON.parse(getToken());
+            
+            const goBack = () => {
+                router.back();
+            }
             const signOut =  async () => {
                 isLoading.value = true;
                 let args = {
@@ -35,11 +41,16 @@
                 if ('response' in response) {
                     isLoading.value  = false;
                     deleteUser();
+                    deleteToken();
+                    store.dispatch({
+                        type: 'auth/logout',
+                        credentials: ''
+                    })
                     router.replace('/auth')
                 }
             }
             return {
-                signOut, isLoading
+                signOut, isLoading, goBack
             }
         }
         

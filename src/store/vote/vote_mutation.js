@@ -5,7 +5,6 @@ export const voteMutations = {
         state.totalVotes += payload.amount;
     },
     onVoteIncrement(state,payload) {
-        console.log(payload.housemate)
         if(state.votesLeft > 0 && state.votesLeft <= 100) {
             state.houseMates.map((houseMate) => {
                 if(houseMate.name === payload.housemate.name) {
@@ -25,7 +24,6 @@ export const voteMutations = {
         }
     },
     onVoteDecrement(state,payload) {
-        console.log(payload.housemate)
         state.houseMates.map((houseMate) => {
             if(houseMate.name === payload.housemate.name) {
               if(houseMate.voteCount > 0 && payload.housemate.voteCount <= 100) {
@@ -37,17 +35,17 @@ export const voteMutations = {
                     type: 'votes/setVotesLeft',
                     command: 'decrease'
                 });
-                houseMate.voteCount -= 10
+                houseMate.voteCount -= 10;
               }
             }
         })
     },
     setRemainingVotes(state, payload) {
-        if(payload.command === 'increase') state.remainingVotes -= 10
-        if(payload.command === 'decrease') state.remainingVotes += 10
+        if(payload.command === 'increase') state.remainingVotes -= 10;
+        if(payload.command === 'decrease') state.remainingVotes += 10;
     },
     setVotesLeft(state, {command}){
-        if(command === 'increase')  state.votesLeft -= 10
-        if(command === 'decrease')  state.votesLeft += 10
+        if(command === 'increase')  state.votesLeft -= 10;
+        if(command === 'decrease')  state.votesLeft += 10;
     }
-}
+};
