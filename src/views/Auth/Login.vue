@@ -45,6 +45,7 @@
   import { setUser, setToken } from '@/helpers';
   export default {
     components: {Form,InputField,},
+    name: 'Login',
     setup(){
       const {login} = routes();
       const {loginSchema} = schema();

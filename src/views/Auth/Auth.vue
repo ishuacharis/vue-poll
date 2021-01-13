@@ -11,23 +11,30 @@
 </template> 
 
 <script>
-  import {watch, computed} from 'vue'
-  import {useRoute, useRouter} from 'vue-router'
+  import {watch, computed, onMounted} from 'vue'
+  import {useRoute, useRouter, } from 'vue-router'
   import Login from './Login.vue'
   import Register from './Register.vue'
+    
   export default {
     name: 'Auth',
     components : {
       Login, Register
     },
     setup() {
+      const router = useRouter()
       window.route = useRoute()
       const route  =  useRoute()
-      const router = useRouter()
+    
       //const {query: {a}} = useRoute()
       const a  = computed(() => route.query.a)
 
-
+      onMounted(() => {
+        router.push({
+          path: '/auth',
+          query: {a: 'login'}
+        })
+      })
       watch(a, function(newQuery, oldQuery) {
         console.log(`old query is ${oldQuery} and new query is ${newQuery}`)
       })
