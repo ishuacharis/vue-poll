@@ -9,7 +9,7 @@ const setUser = (args) => {
 }
 
 const setToken  = (args) => {
-    localStorage.setItem(TOKEN, JSON.stringify(args)) 
+    localStorage.setItem(TOKEN, args) 
 }
 
 const deleteUser =  () => {
@@ -27,7 +27,7 @@ const isLoggedIn = () => {
 
 const getToken = () => {
     
-    return store.getters['auth/token'] || false;
+    return store.getters['auth/token'] ;
 }
 
 export { isLoggedIn , setUser, getToken, deleteUser,setToken, deleteToken };

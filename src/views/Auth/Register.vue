@@ -25,8 +25,8 @@
                 <button 
                   class="btn" 
                   :class="{hide: isSubmitting}" 
-                  :disabled="!(dirty && touched) || isSubmitting">
-                  Login</button>
+                  :disabled="!(dirty && touched) || isSubmitting" v-if="!isSubmitting">
+                  Create</button>
                   <div v-if="isSubmitting" class="loading"></div>
             </div>
           </Form>

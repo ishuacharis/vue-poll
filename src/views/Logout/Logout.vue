@@ -25,8 +25,8 @@
             let isLoading  =  ref(false);
             const {logout} = routes();
             const router  = useRouter();
-            const token  = JSON.parse(getToken());
-            
+            const token  = getToken();
+            console.log(token)
             const goBack = () => {
                 router.back();
             }
