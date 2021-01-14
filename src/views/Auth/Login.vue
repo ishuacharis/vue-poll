@@ -13,7 +13,7 @@
         <Form 
           @submit="onFormSubmit" 
           :validation-schema="loginSchema" 
-          v-slot="{ errors , isSubmitting, meta: {dirty, touched}}"
+          v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
           >
           <div class="field__content">
             <InputField name="email" type="email" placeholder="Email" :error="errors" />
@@ -26,7 +26,7 @@
             <router-link :to="{path: '/auth', query: {a: 'register'}}" class="link-item">Dont have an account?</router-link>
           </div>
           <div class="field">
-              <button class="btn"  :disabled="!(dirty && touched) || isSubmitting" v-if="!isSubmitting">Login</button>
+              <button class="btn"  :disabled="!(dirty && valid) || isSubmitting" v-if="!isSubmitting">Login</button>
               <div v-if="isSubmitting" class="loading"></div>
           </div>
         </Form>
