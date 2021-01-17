@@ -11,7 +11,8 @@
           <Form 
             @submit="onFormSubmit" 
             :validation-schema="registerSchema" 
-            v-slot="{ errors, isSubmitting, meta: {dirty, touched} }">
+            :initial-values="formValues"
+            v-slot="{ errors, isSubmitting, meta: {dirty, valid} }">
             <div class="field__content">
               <InputField name="name" type="name" placeholder="Name" :error="errors" />
               <InputField name="email" type="text" placeholder="Email" :error="errors" />
@@ -76,7 +77,9 @@ import { useRouter } from 'vue-router';
       };
 
       return {
-        registerSchema,onFormSubmit
+        registerSchema,
+        onFormSubmit,
+        formValues:  { name: '', email: '', phoneNo: '', password: '' },
       };
     }
   };

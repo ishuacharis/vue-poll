@@ -12,6 +12,7 @@
         </div>
         <Form 
           @submit="onFormSubmit" 
+          :initial-values= "formValues"
           :validation-schema="loginSchema" 
           v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
           >
@@ -51,6 +52,7 @@
       const {loginSchema} = schema();
       const router = useRouter();
       const store =  useStore() ;
+      
       const onFormSubmit = async (values, {resetForm}) => {
         const data = {
           email: values.email,
@@ -81,7 +83,9 @@
 
       
       return {
-        loginSchema, onFormSubmit,
+        loginSchema, 
+        onFormSubmit,
+        formValues:  { email: '', password: '' },
       }
     }
   }
