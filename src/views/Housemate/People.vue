@@ -33,6 +33,7 @@
   import { useStore } from 'vuex';
   import {useRoute, useRouter} from 'vue-router';
   import {getUser} from '@/data/data';
+  import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
 
   import MyVote from '@/components/MyVote/MyVote.vue';
   export default {
@@ -49,16 +50,10 @@
       const user = ref(await getUser(screen_name))
 
       const onVoteIncre = () => {
-        store.dispatch({
-          type: 'votes/onVoteIncrement',
-          housemate: user.value
-        })
+        store.dispatch(onVoteIncrement(user.value))
       }
       const onVoteDecre = ()  => {
-        store.dispatch({
-          type: 'votes/onVoteDecrement',
-          housemate: user.value
-        })
+        store.dispatch(onVoteDecrement(user.value))
       }
 
       

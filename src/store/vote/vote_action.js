@@ -1,3 +1,5 @@
+
+
 export const voteActions  = {
 
     incrementVote(context,payload){
@@ -24,6 +26,7 @@ export const voteActions  = {
         })
     },
     setRemainingVotes(context,payload) {
+        console.log(payload)
         let type =  payload.type.split("/")[1]
         return context.commit({
             type: type,

@@ -1,3 +1,4 @@
+import { setRemainingVotes, setVotesLeft } from './actions/action_creators';
 
 export const voteMutations = {
 
@@ -9,14 +10,8 @@ export const voteMutations = {
             state.houseMates.map((houseMate) => {
                 if(houseMate.name === payload.housemate.name) {
                     if(houseMate.voteCount >= 0 && payload.housemate.voteCount < 100) {
-                        this.dispatch({
-                            type: 'votes/setRemainingVotes',
-                            command: 'increase'
-                        });
-                        this.dispatch({
-                            type: 'votes/setVotesLeft',
-                            command: 'increase'
-                        });
+                        this.dispatch(setRemainingVotes('increase'));
+                        this.dispatch(setVotesLeft('increase'));
                         houseMate.voteCount += 10;
                     }
                 }
@@ -27,14 +22,8 @@ export const voteMutations = {
         state.houseMates.map((houseMate) => {
             if(houseMate.name === payload.housemate.name) {
               if(houseMate.voteCount > 0 && payload.housemate.voteCount <= 100) {
-                this.dispatch({
-                    type: 'votes/setRemainingVotes',
-                    command: 'decrease'
-                });
-                this.dispatch({
-                    type: 'votes/setVotesLeft',
-                    command: 'decrease'
-                });
+                this.dispatch(setRemainingVotes('decrease'));
+                this.dispatch(setVotesLeft('decrease'));
                 houseMate.voteCount -= 10;
               }
             }
