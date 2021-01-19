@@ -15,6 +15,7 @@
   import {useRoute, useRouter, } from 'vue-router'
   import Login from './Login.vue'
   import Register from './Register.vue'
+
     
   export default {
     name: 'Auth',

@@ -18,10 +18,14 @@ export default function() {
             headers: headers["headers"],
             body: JSON.stringify(body)
         }
-        return await fetch(uri,options)
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err)
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
     }
 
     const register = async (args) => {
@@ -34,10 +38,56 @@ export default function() {
             headers: headers["headers"],
             body: JSON.stringify(body)
         }
-        return await fetch(uri,options)
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => console.log(err))
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
+    }
+
+    const forgotPassword = async (args) => {
+        const endPoint  = args["endPoint"];
+        const body =  args["body"];
+        const method = args["method"];
+        const uri = BASE_URI+endPoint; 
+        const options = {
+            method: method,
+            headers: headers["headers"],
+            body: JSON.stringify(body)
+        }
+
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
+       
+    }
+
+    const resetPassword = async (args) => {
+        const endPoint  = args["endPoint"];
+        const body =  args["body"];
+        const method = args["method"];
+        const uri = BASE_URI+endPoint; 
+        const options = {
+            method: method,
+            headers: headers["headers"],
+            body: JSON.stringify(body)
+        }
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
     }
 
     const logout = async (args) =>  {
@@ -60,6 +110,6 @@ export default function() {
     }
 
     return {
-        login,register, logout
+        login,register, logout,forgotPassword, resetPassword,
     }
 }

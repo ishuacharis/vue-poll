@@ -16,6 +16,7 @@
     import { getToken, deleteToken, deleteUser  } from '@/helpers';
     import { useRouter } from 'vue-router';
     import { useStore } from 'vuex';
+    import { unauth } from '@/store/auth/actions/action_creators';
     export default {
 
         name: 'Logout',
@@ -42,10 +43,7 @@
                     isLoading.value  = false;
                     deleteUser();
                     deleteToken();
-                    store.dispatch({
-                        type: 'auth/logout',
-                        credentials: ''
-                    })
+                    store.dispatch(unauth(''))
                     router.replace('/auth')
                 }
             }
@@ -57,44 +55,6 @@
     }
 </script>
 
-<style lang="css">
-    .logout-container {
-        width: 100%;
-        height:  100vh;
-        background-color: rgb(197, 195, 195);
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .modal {
-        max-width: 30rem;
-        width: 100%;
-        background-color: #fff;
-        padding: 3rem;
-        text-align: center;
-    }
-
-    .btn-logout {
-        padding: 1rem 1.8rem;
-        color: #fff;
-        background-color: brown;
-        font-size: 1.8rem;
-        margin: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 2rem;
-        cursor: pointer;
-    }
-    .btn-cancel {
-        padding: 1rem 1.8rem;
-        color: #000;
-        background-color: gray;
-        font-size: 1.8rem;
-        margin: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 2rem;
-        cursor: pointer;
-    }
+<style src="./Logout.css" scoped>
+    
 </style>

@@ -21,12 +21,12 @@
                 </li>
 
                 <li class="sidenav-link">
-                    <router-link to="#" class="sidenav-item">
+                    <router-link :to="{path:  '/notifications'}" class="sidenav-item">
                         Notifications
                     </router-link>
                 </li>
                 <li class="sidenav-link">
-                    <router-link to="#" class="sidenav-item">
+                    <router-link :to="{path:  '/messages'}" class="sidenav-item">
                         Messages
                     </router-link>
                 </li>

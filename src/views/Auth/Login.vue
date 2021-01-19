@@ -10,6 +10,7 @@
           <span class="or">OR</span>
           <span class="line right"></span>
         </div>
+        <div class="error" v-if="error">{{ error }}</div>  
         <Form 
           @submit="onFormSubmit" 
           :initial-values= "formValues"
@@ -23,7 +24,7 @@
             
           </div>
           <div class="link">
-            <router-link to="#" class="link-item">Forgot password?</router-link>
+            <router-link :to="{path: '/forgot-password' }" class="link-item">Forgot password?</router-link>
             <router-link :to="{path: '/auth', query: {a: 'register'}}" class="link-item">Dont have an account?</router-link>
           </div>
           <div class="field">
@@ -37,6 +38,7 @@
 </template>
  
 <script>
+  import { ref } from 'vue';
   import { useRouter} from  'vue-router';
   import { useStore } from 'vuex';
   import {Form,} from  'vee-validate';
@@ -44,10 +46,12 @@
   import schema from '@/schema';
   import routes from '@/routes';
   import { setUser, setToken } from '@/helpers';
+  import { auth } from '@/store/auth/actions/action_creators';
   export default {
     components: {Form,InputField,},
     name: 'Login',
-    setup(){
+    setup(){ 
+      const error = ref(null);
       const {login} = routes();
       const {loginSchema} = schema();
       const router = useRouter();
@@ -69,13 +73,11 @@
           if('response' in response) {
              setUser(response["response"]["user"]);
              setToken(response["response"]["token"]);
-              store.dispatch({
-                type: 'auth/login',
-                credentials: response["response"]
-              })
+            store.dispatch(auth(response["response"]))
              router.push('/housemates');
           }
         } catch (e) {
+          error.value = e.message;
           console.log(`error is ${e}`)
         }
 
@@ -86,6 +88,7 @@
         loginSchema, 
         onFormSubmit,
         formValues:  { email: '', password: '' },
+        error
       }
     }
   }

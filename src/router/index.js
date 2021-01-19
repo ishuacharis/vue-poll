@@ -8,6 +8,10 @@ const Housemate = () => import('@/views/Housemate/Housemate.vue');
 const Gallery = () => import('@/views/Gallery/Gallery.vue');
 const Testing = () => import('@/views/Testing/Testing.vue');
 const Auth = () => import('@/views/Auth/Auth.vue');
+const ForgotPassword = () => import('@/views/Auth/ForgotPassword.vue');
+const ResetPassword = () => import('@/views/Auth/ResetPassword.vue');
+const Notifications = () => import('@/views/Notifications/Notifications.vue');
+const Messages = () => import('@/views/Messages/Messages.vue');
 
 
 
@@ -55,6 +59,34 @@ const routes = [
     component: Auth,
     beforeEnter: guestGuard,
     meta: { guest: true }
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword,
+    beforeEnter: guestGuard,
+    meta: { guest: true }
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+    beforeEnter: guestGuard,
+    meta: { guest: true }
+  },
+  {
+    path: '/notifications',
+    name: 'Notifications',
+    component: Notifications,
+    beforeEnter: authUserGuard,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: Messages,
+    beforeEnter: authUserGuard,
+    meta: { requiresAuth: true }
   },
   {
     path: '/logout',

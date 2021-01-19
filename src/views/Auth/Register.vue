@@ -8,6 +8,7 @@
             <span class="or">OR</span>
             <span class="line right"></span>
           </div>
+          <div class="error" v-if="error">{{ error }}</div>  
           <Form 
             @submit="onFormSubmit" 
             :validation-schema="registerSchema" 
@@ -38,16 +39,19 @@
 </template>
 
 <script>
+  import {ref} from 'vue';
   import {Form,} from  'vee-validate';
   import InputField from '@/components/shared/InputField';
   import routes from '@/routes';
   import schema from '@/schema';
   import { useStore } from 'vuex';
   import { setUser, setToken } from '../../helpers';
-import { useRouter } from 'vue-router';
+  import { useRouter } from 'vue-router';
+  import { auth } from '@/store/auth/actions/action_creators';
   export default {
     components: {Form,InputField},
     setup() {     
+      const error = ref(null);
       const {registerSchema} = schema();
       const {register} = routes();
       const store = useStore();
@@ -64,15 +68,17 @@ import { useRouter } from 'vue-router';
           "method":  "POST",
           "body":  data
           };
-        const response = await register(args);
-        if('response' in response) {
-          setUser(response["response"]["user"]);
-          setToken(response["response"]["token"]);
-          store.dispatch({
-            type: 'auth/login',
-            credentials: response["response"]
-          })
-          router.replace("/housemates")
+        try {
+          
+          const response = await register(args);
+          if('response' in response) {
+            setUser(response["response"]["user"]);
+            setToken(response["response"]["token"]);
+            store.dispatch(auth(response["response"]))
+            router.replace("/housemates")
+          }
+        } catch (e) {
+          error.value  = e.message;
         }
       };
 
@@ -80,6 +86,7 @@ import { useRouter } from 'vue-router';
         registerSchema,
         onFormSubmit,
         formValues:  { name: '', email: '', phoneNo: '', password: '' },
+        error
       };
     }
   };
