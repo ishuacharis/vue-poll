@@ -9,7 +9,7 @@
 <script>
   import Housemate from '@/components/Housemate/Housemate';
   export default {
-    name: 'Housemates',
+    name: 'HousemateList',
     components: {
       Housemate
     },
@@ -22,4 +22,4 @@
   };
 </script>
 
-<style lang="css" scoped src="./Housemates.css"></style>
+<style lang="css" scoped src="./HousemateList.css"></style>

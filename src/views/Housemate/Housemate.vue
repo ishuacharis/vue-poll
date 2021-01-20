@@ -9,9 +9,7 @@
       </div>
     </template>
     <template #fallback>
-      <div class="container">
-        <div class="loading"></div>
-      </div>
+      <div class="loading"></div>
     </template>
   </Suspense>
 </template>

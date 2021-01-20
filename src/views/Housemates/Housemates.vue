@@ -1,21 +1,25 @@
 <template lang="html">
-  <div class="container">
-    <Project />
-  </div>
+  <HousemateList :houseMates="houseMates" />
 </template>
 
 <script>
-  import {onUnmounted} from 'vue'
-  import Project from '@/components/Project/Project.vue'
+  import { useStore } from 'vuex';
+  import {onUnmounted, computed} from 'vue'
+  import HousemateList from '@/components/HousemateList/HousemateList.vue'
   export default {
     name: 'Housemates',
     components: {
-      Project
+      HousemateList
     },
     setup() {
+        const store =  useStore();
       onUnmounted(() => {
         console.log("left")
       })
+
+      return {
+        houseMates: computed(() => store.getters['votes/houseMates']),
+      }
     }
   }
 </script>

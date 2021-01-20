@@ -1,12 +1,12 @@
 <template lang="html">
     <div class="container">
-
+        Notifications
     </div>
 </template>
 
 <script>
     export default {
-        name: 'Notifiactions',
+        name: 'Notifications',
         setup() {
             
         }

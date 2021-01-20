@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import NotFound  from '../views/NotFound';
 
 const Home = () => import("@/views/Home.vue");
+const Project = () => import( '@/views/Project/Project.vue');
 const Housemates = () => import( '@/views/Housemates/Housemates.vue');
 const Housemate = () => import('@/views/Housemate/Housemate.vue');
 const Gallery = () => import('@/views/Gallery/Gallery.vue');
@@ -20,6 +21,36 @@ const Messages = () => import('@/views/Messages/Messages.vue');
 const routes = [
   {
     path: '/',
+    name: 'Project',
+    component: Project,
+    beforeEnter: authUserGuard,
+    meta: { requiresAuth: true },
+    redirect: '' ,
+    children: [
+      {
+        path: '',
+        name: 'Housemates',
+        component: Housemates,
+      },
+      {
+        path: '/housemate/:screen_name',
+        name: 'Housemate',
+        component: Housemate
+      },
+      {
+        path: '/notifications',
+        name: 'Notifications',
+        component: Notifications,
+      },
+      {
+        path: '/messages',
+        name: 'Messages',
+        component: Messages,
+      },
+    ]
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home
   },
@@ -36,18 +67,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  {
-    path: '/housemates',
-    name: 'Housemates',
-    component: Housemates,
-    beforeEnter: authUserGuard,
-    meta: {requiresAuth: true}
-  },
-  {
-    path: '/housemate/:screen_name',
-    name: 'Housemate',
-    component: Housemate
-  },
+  
   {
     path: '/gallery',
     name: 'Gallery',
@@ -74,20 +94,7 @@ const routes = [
     beforeEnter: guestGuard,
     meta: { guest: true }
   },
-  {
-    path: '/notifications',
-    name: 'Notifications',
-    component: Notifications,
-    beforeEnter: authUserGuard,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/messages',
-    name: 'Messages',
-    component: Messages,
-    beforeEnter: authUserGuard,
-    meta: { requiresAuth: true }
-  },
+  
   {
     path: '/logout',
     name: 'Logout',

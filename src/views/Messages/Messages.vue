@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="container">
-
+        Messages
     </div>
 </template>
 
@@ -9,6 +9,9 @@
         name: 'Messages',
         setup() {
             
+            return {
+                
+            }
         }
         
     }

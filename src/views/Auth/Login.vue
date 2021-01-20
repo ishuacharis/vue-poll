@@ -74,7 +74,7 @@
              setUser(response["response"]["user"]);
              setToken(response["response"]["token"]);
             store.dispatch(auth(response["response"]))
-             router.push('/housemates');
+             router.replace('/');
           }
         } catch (e) {
           error.value = e.message;

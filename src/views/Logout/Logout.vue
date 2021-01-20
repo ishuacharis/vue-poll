@@ -27,7 +27,6 @@
             const {logout} = routes();
             const router  = useRouter();
             const token  = getToken();
-            console.log(token)
             const goBack = () => {
                 router.back();
             }
