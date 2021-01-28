@@ -50,7 +50,7 @@
                     }
                 } catch (e) {
                     error.value = e.message;
-                    console.log(error)
+                    console.log(e.message)
                 }
             };
             return {
