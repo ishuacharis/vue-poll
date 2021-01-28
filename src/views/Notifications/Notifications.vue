@@ -1,12 +1,16 @@
 <template lang="html">
-    <div class="container">
-        Notifications
+    <div class="notifications">
+        <Notification />
     </div>
 </template>
 
 <script>
+    import Notification from '@/components/Notification/Notification.vue';
     export default {
         name: 'Notifications',
+        components: {
+            Notification
+        },
         setup() {
             
         }

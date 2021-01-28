@@ -44,8 +44,7 @@
         </div>
         <div class="sidenav-top" :class="{'offback': showToolTip}">
             <ul class="sidenav-links">
-
-                 <router-link to="#" class="sidenav-item">
+                 <router-link :to="{path: '/'}" class="sidenav-item">
                     <li class="sidenav-link">
                         <span><i class='bx bx-home'></i></span>
                         <span>Home</span>
