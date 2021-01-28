@@ -67,18 +67,18 @@
           "method":  "POST",
           "body":  data
           };
-          resetForm()
+          
         try {
           const response = await login(args)
           if('response' in response) {
-             setUser(response["response"]["user"]);
-             setToken(response["response"]["token"]);
+            setUser(response["response"]["user"]);
+            setToken(response["response"]["token"]);
             store.dispatch(auth(response["response"]))
-             router.replace('/');
+            resetForm()
+            router.replace('/');
           }
         } catch (e) {
           error.value = e.message;
-          console.log(`error is ${e}`)
         }
 
       }

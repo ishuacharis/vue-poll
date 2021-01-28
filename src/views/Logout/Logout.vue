@@ -23,6 +23,7 @@
 
         setup() {
             const store  = useStore();
+            let error  = ref(null);
             let isLoading  =  ref(false);
             const {logout} = routes();
             const router  = useRouter();
@@ -37,17 +38,23 @@
                     method: 'POST',
                     token: token
                 };
-                const response = await logout(args);
-                if ('response' in response) {
-                    isLoading.value  = false;
-                    deleteUser();
-                    deleteToken();
-                    store.dispatch(unauth(''))
-                    router.replace('/auth')
+                try {
+                    
+                    const response = await logout(args);
+                    if ('response' in response) {
+                        isLoading.value  = false;
+                        deleteUser();
+                        deleteToken();
+                        store.dispatch(unauth(''))
+                        router.replace('/auth')
+                    }
+                } catch (e) {
+                    error.value = e.message;
+                    console.log(error)
                 }
-            }
+            };
             return {
-                signOut, isLoading, goBack
+                signOut, isLoading, goBack, error
             }
         }
         

@@ -6,108 +6,51 @@ export default function() {
             "Content-type": "application/json;charset=UTF-8",
             "Accept": "application/json"
         }
-    }
+    };
+
+    const connect = async (args) => {
+        const endPoint  = args["endPoint"];
+        const body =  args["body"];
+        const method = args["method"];
+        const token  = args['token'] || '';
+        const authorization = token ?  `Bearer ${token}` : '' ;
+        headers["headers"]["Authorization"] = authorization;
+        const uri = BASE_URI+endPoint; 
+        const options = {
+            method: method,
+            headers: headers["headers"],
+            body: JSON.stringify(body)
+        }
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
+    };
 
     const login = async (args) => {
-        const endPoint  = args["endPoint"];
-        const body =  args["body"];
-        const method = args["method"];
-        const uri = BASE_URI+endPoint; 
-        const options = {
-            method: method,
-            headers: headers["headers"],
-            body: JSON.stringify(body)
-        }
-        const response = await fetch(uri,options)
-        if ( !response.ok ) {
-            const error = await response.json();
-            
-            throw new Error(error['response']['message']);
-        }
-
-        return await response.json();
-    }
+        return await connect(args);
+    };
 
     const register = async (args) => {
-        const endPoint  = args["endPoint"];
-        const body =  args["body"];
-        const method = args["method"];
-        const uri = BASE_URI+endPoint; 
-        const options = {
-            method: method,
-            headers: headers["headers"],
-            body: JSON.stringify(body)
-        }
-        const response = await fetch(uri,options)
-        if ( !response.ok ) {
-            const error = await response.json();
-            
-            throw new Error(error['response']['message']);
-        }
-
-        return await response.json();
-    }
+        return await connect(args);
+    };
 
     const forgotPassword = async (args) => {
-        const endPoint  = args["endPoint"];
-        const body =  args["body"];
-        const method = args["method"];
-        const uri = BASE_URI+endPoint; 
-        const options = {
-            method: method,
-            headers: headers["headers"],
-            body: JSON.stringify(body)
-        }
-
-        const response = await fetch(uri,options)
-        if ( !response.ok ) {
-            const error = await response.json();
-            
-            throw new Error(error['response']['message']);
-        }
-
-        return await response.json();
+        return await connect(args);
        
-    }
+    };
 
     const resetPassword = async (args) => {
-        const endPoint  = args["endPoint"];
-        const body =  args["body"];
-        const method = args["method"];
-        const uri = BASE_URI+endPoint; 
-        const options = {
-            method: method,
-            headers: headers["headers"],
-            body: JSON.stringify(body)
-        }
-        const response = await fetch(uri,options)
-        if ( !response.ok ) {
-            const error = await response.json();
-            
-            throw new Error(error['response']['message']);
-        }
-
-        return await response.json();
-    }
+        return await connect(args);
+    };
 
     const logout = async (args) =>  {
-        const endPoint  = args["endPoint"];
-        const method =  args["method"];
-        const authorization = `Bearer ${args["token"]}`;
-
-        headers["headers"]["Authorization"] = authorization;
-        const uri = BASE_URI+endPoint;
-        console.log(headers)
-        const options = {
-            method: method,
-            headers: headers["headers"]
-        };
-        
-        return await fetch(uri, options)
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => console.log(err))
-    }
+        return await connect(args);
+    };
 
     return {
         login,register, logout,forgotPassword, resetPassword,
