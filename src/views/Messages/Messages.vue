@@ -6,6 +6,7 @@
 
 <script>
     import Message  from '@/components/Message/Message';
+    
     export default {
         name: 'Messages',
         components: {
@@ -13,9 +14,6 @@
         },
         setup() {
             
-            return {
-                
-            }
         }
         
     }

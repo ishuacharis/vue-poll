@@ -51,8 +51,20 @@ export default function() {
     const logout = async (args) =>  {
         return await connect(args);
     };
+    const notifications =  async (args) => {
+        const endPoint  = args["endPoint"];
+        const uri = BASE_URI+endPoint; 
+        const response = await fetch(uri)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
+    }
 
     return {
-        login,register, logout,forgotPassword, resetPassword,
+        login,register, logout,forgotPassword, resetPassword,notifications
     }
 }
