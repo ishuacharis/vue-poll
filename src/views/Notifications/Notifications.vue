@@ -27,10 +27,9 @@
                 }
             const userNotifications = async () => {
                 feedback.value = await notifications(args);
-                let { response:{ message:m, notifications:n } } = feedback.value;
+                let { response:{ message:m, notifications:{ data} } } = feedback.value;
                 notificationsObject.message = m
-                notificationsObject.notifications = n
-                notificationsObject.data = n.data
+                notificationsObject.data = data
             }
             onMounted(userNotifications)
             const messageChannel = pusherClient.subscribe('login-channel');
