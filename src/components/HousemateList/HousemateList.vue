@@ -2,7 +2,7 @@
   <div class="housemates">
     <Housemate v-for="houseMate in houseMates"
     :houseMate= "houseMate"
-    :key="houseMate.name" />
+    :key="houseMate.id" />
   </div>
 </template>
 

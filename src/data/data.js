@@ -1,22 +1,26 @@
 
 const totalVotes = 100 
 const houseMatesUpForEviction = [{
+        id: 1,
         name: 'laycon',
         avatar: require("../assets/laycon.jpg"),
         voteCount: 0
 
     },
     {
+        id: 2,
         name: 'lilo',
         avatar: require("../assets/lilo.jpeg"),
         voteCount: 0
     },
     {
+        id: 3,
         name: 'trikkytee',
         avatar: require("../assets/trikkytee.jpg"),
         voteCount: 0
     },
     {
+        id: 4,
         name: 'vee',
         avatar: require("../assets/vee.jpg"),
         voteCount: 0
