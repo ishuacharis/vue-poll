@@ -29,6 +29,9 @@ export const voteMutations = {
             }
         })
     },
+    setHousemates(state,payload) {
+        state.houseMates = payload.houseMates
+    },
     setRemainingVotes(state, payload) {
         if(payload.command === 'increase') state.remainingVotes -= 10;
         if(payload.command === 'decrease') state.remainingVotes += 10;

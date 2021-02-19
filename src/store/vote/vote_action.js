@@ -39,7 +39,13 @@ export const voteActions  = {
             type: action,
             command: command
         });
-        
+    },
+    setHousemates(context,{type,command}) {
+        let action =  type.split("/")[1]
+        return context.commit({
+            type: action,
+            command: command
+        });
     }
 
 };
