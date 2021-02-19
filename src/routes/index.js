@@ -68,6 +68,27 @@ export default function() {
         return await connect(args);
     };
 
+    const eviction = async (args) => {
+        const endPoint  = args["endPoint"];
+        const method = args["method"];
+        const token  = args['token'] || '';
+        const authorization = token ?  `Bearer ${token}` : '' ;
+        headers["headers"]["Authorization"] = authorization;
+        const uri = BASE_URI+endPoint; 
+        const options = {
+            method: method,
+            headers: headers["headers"],
+        }
+        const response = await fetch(uri,options)
+        if ( !response.ok ) {
+            const error = await response.json();
+            
+            throw new Error(error['response']['message']);
+        }
+
+        return await response.json();
+    };
+
     return {
         login,
         register, 
@@ -75,6 +96,7 @@ export default function() {
         forgotPassword, 
         resetPassword,
         notifications,
-        vote
+        vote,
+        eviction
     }
 }
