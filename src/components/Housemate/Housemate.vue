@@ -2,9 +2,9 @@
   <div class="housemate">
     <router-link 
       :to="{name: 'Housemate', 
-      params: {screen_name: houseMate.name} }" 
+      params: {screen_name: houseMate.screen_name} }" 
       class="avatar avatar-large">
-      <img :src="houseMate.avatar" alt="" />
+      <img :src="require(`@/assets/${houseMate.avatar}`)" alt="" />
     </router-link>
     
   </div>
