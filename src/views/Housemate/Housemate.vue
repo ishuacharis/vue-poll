@@ -24,6 +24,7 @@
     },
      setup() {
        const error =  ref(null)
+       
        onErrorCaptured(e => {
          error.value = e
        })
