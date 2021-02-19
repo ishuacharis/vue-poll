@@ -1,4 +1,5 @@
 
+import { housemates }from '../helpers';
 const totalVotes = 100 
 const houseMatesUpForEviction = [{
         id: 1,
@@ -39,9 +40,10 @@ const themes  =  {
 }
 
 const getUser =  (screen_name) => {
+    console.log(housemates())
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(houseMatesUpForEviction.find(housemate => housemate.name === screen_name))
+        resolve(housemates().find(housemate => housemate.screen_name === screen_name))
         reject("Failure")
       }, 3000)
     })
