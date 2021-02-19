@@ -38,7 +38,7 @@ export const getUserId = () => {
 
 export const housemates = () => {
     
-    return store.state.votes.houseMates|| null
+    return  JSON.parse(localStorage.getItem('HOUSEMATES')) || null
 }
 
 export const setEviction = (args) => {
