@@ -2,7 +2,7 @@ import store from '../store';
 
 const USER = "USER";
 const TOKEN = 'TOKEN';
-
+const HOUSEMATES = 'HOUSEMATES';
 
 export const setUser = (args) => {
     localStorage.setItem(USER, JSON.stringify(args))
@@ -36,6 +36,14 @@ export const getUserId = () => {
     return store.state.auth.user.id || null
 }
 
+export const housemates = () => {
+    
+    return store.state.votes.houseMates|| null
+}
+
+export const setEviction = (args) => {
+    localStorage.setItem(HOUSEMATES, JSON.stringify(args))
+}
 
 
 
