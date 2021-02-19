@@ -62,9 +62,19 @@ export default function() {
         }
 
         return await response.json();
-    }
+    };
+
+    const vote = async (args) => {
+        return await connect(args);
+    };
 
     return {
-        login,register, logout,forgotPassword, resetPassword,notifications
+        login,
+        register, 
+        logout,
+        forgotPassword, 
+        resetPassword,
+        notifications,
+        vote
     }
 }
