@@ -2,9 +2,9 @@ import { totalVotes, houseMatesUpForEviction } from '../../data/data';
 
 export const voteStates = () => {
     return{
-        totalVotes: totalVotes,
-        houseMates: JSON.parse(localStorage.getItem('HOUSEMATES')) || houseMatesUpForEviction,
-        remainingVotes: totalVotes,
-        votesLeft: totalVotes
+        totalVotes: JSON.parse(localStorage.getItem('VOTES')) || totalVotes,
+        houseMates: JSON.parse(localStorage.getItem('HOUSEMATES') ) || houseMatesUpForEviction,
+        remainingVotes: JSON.parse(localStorage.getItem('VOTES')),
+        votesLeft: JSON.parse(localStorage.getItem('VOTES'))
     }
 };

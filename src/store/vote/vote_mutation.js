@@ -39,5 +39,21 @@ export const voteMutations = {
     setVotesLeft(state, {command}){
         if(command === 'increase')  state.votesLeft -= 10;
         if(command === 'decrease')  state.votesLeft += 10;
+    },
+
+    setUserRemainingVotes(state, payload) {
+      
+        //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
+            if(payload.command === 'increase') state.remainingVotes -= 10;
+            if(payload.command === 'decrease') state.remainingVotes += 10;
+        //}
+        
+    },
+    setUserVotesLeft(state, {command}){
+        //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
+            if(command === 'increase')  state.votesLeft -= 10;
+            if(command === 'decrease')  state.votesLeft += 10;
+        //}
+        
     }
 };

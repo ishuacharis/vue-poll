@@ -40,6 +40,21 @@ export const voteActions  = {
             command: command
         });
     },
+    setUserRemainingVotes(context,payload) {
+        
+        let type =  payload.type.split("/")[1]
+        return context.commit({
+            type: type,
+            command: payload.command
+        });
+    },
+    setUserVotesLeft(context,{type,command}) {
+        let action =  type.split("/")[1]
+        return context.commit({
+            type: action,
+            command: command
+        });
+    },
     setHousemates(context,{type,command}) {
         let action =  type.split("/")[1]
         return context.commit({

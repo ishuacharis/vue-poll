@@ -3,7 +3,9 @@ import { INCREMENT_VOTE,
     ONVOTE_DECREMENT, 
     SET_REMAINING_VOTES, 
     SET_VOTES_LEFT,
-    SET_HOUSEMATES } from './action_types';
+    SET_HOUSEMATES,
+    SET_USER_REMAINING_VOTES,
+    SET_USER_VOTES_LEFT } from './action_types';
 
 export const incrementVote = (amount) => ({
     type: INCREMENT_VOTE,
@@ -24,6 +26,15 @@ export const setRemainingVotes = (payload) => ({
 
 export const setVotesLeft = (payload) => ({
     type: SET_VOTES_LEFT,
+    command: payload
+})
+export const setUserRemainingVotes = (payload) => ({
+    type: SET_USER_REMAINING_VOTES,
+    command: payload 
+})
+
+export const setUserVotesLeft = (payload) => ({
+    type: SET_USER_VOTES_LEFT,
     command: payload
 })
 
