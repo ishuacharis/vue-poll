@@ -9,7 +9,7 @@
 
 <script>
     import { pusherClient } from '@/Context/PusherContext';
-    import { ref , onMounted, reactive} from 'vue';
+    import { onMounted, reactive} from 'vue';
     import routes from '@/routes';
     //import Notification from '@/components/Notification/Notification';
     export default {
@@ -19,15 +19,14 @@
         },
         setup() {
             const { notifications } = routes();
-            const feedback  = ref([]);
+            
             const notificationsObject = reactive({});
              let args = {
                     endPoint: "/notifications/3",
                     method: 'GET',
                 }
             const userNotifications = async () => {
-                feedback.value = await notifications(args);
-                let { response:{ message:m, notifications:{ data} } } = feedback.value;
+                const { response:{ message:m, notifications:{ data} } } = await notifications(args);
                 notificationsObject.message = m
                 notificationsObject.data = data
             }
@@ -37,7 +36,7 @@
                 console.log(`notifications ${data}`);
             });
             return  {
-                feedback,
+                
                 userNotifications,notificationsObject
             }
         }
