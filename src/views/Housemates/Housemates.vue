@@ -1,5 +1,8 @@
 <template lang="html">
-  <HousemateList :houseMates="houseMatesObj.houseMates" />
+  <HousemateList :houseMates="houseMatesObj.houseMates" v-if="!isLoading" />
+  <div v-if="isLoading" class="loading-container">
+    <div class="loading"></div>
+  </div>
 </template>
 
 <script>
@@ -19,7 +22,7 @@
       const store =  useStore();
       const token  = getToken();
       const { eviction } = routes();
-      const feedback  = ref([]);
+      const isLoading =  ref(true);
       const houseMatesObj = reactive({});
       let args = {
         endPoint: "/eviction",
@@ -27,11 +30,11 @@
         token: token
       }
       const getHousemates = async () => {
-        feedback.value =  await eviction(args);
-        const { response:{data} } = feedback.value;
+        const { response:{data} } =  await eviction(args);
         houseMatesObj.houseMates = data
         store.dispatch(setHousemates(houseMatesObj))
         setEviction(houseMatesObj.houseMates)
+        isLoading.value = false;
       }
 
       onMounted(getHousemates)
@@ -39,9 +42,9 @@
         console.log("left")
       })
       
-    //computed(() => store.getters['votes/houseMates']),
     return {
       houseMatesObj,
+      isLoading,
       getHousemates
     }
   }

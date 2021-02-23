@@ -1,17 +1,19 @@
 <template>
-  <div v-if="error" class="">
-    Error Component
-  </div>
-  <Suspense v-else>
-    <template #default>
-      <div class="container">
-        <People />
+  <div class="container">
+      <div v-if="error">
+        Error Component
       </div>
-    </template>
-    <template #fallback>
-      <div class="loading"></div>
-    </template>
-  </Suspense>
+    <Suspense v-else>
+      <template #default>
+          <People />
+      </template>
+      <template #fallback>
+        <div class="loading-container">
+          <div class="loading"></div>
+        </div>
+      </template>
+    </Suspense>
+  </div>
 </template>
 
 <script>
