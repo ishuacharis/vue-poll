@@ -56,7 +56,7 @@
                         <span>Dashboard</span>
                     </li>
                  </router-link>
-                 <router-link to="#" class="sidenav-item">
+                 <router-link :to=" {path: '/profile'} " class="sidenav-item">
                     
                    <li class="sidenav-link" >
                        <span><i class='bx bx-user'></i></span>
