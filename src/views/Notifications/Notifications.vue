@@ -1,8 +1,10 @@
 <template lang="html">
     
     <div class="notifications" v-if="notificationsObject">
-        <!-- <Notification /> -->
-        {{ notificationsObject.data }}
+        <Notification v-for="notification in notificationsObject.data"  
+        :key="notification.id"
+        :notification ="notification" 
+        />
     </div>
 
 </template>
@@ -11,20 +13,21 @@
     import { pusherClient } from '@/Context/PusherContext';
     import { onMounted, reactive} from 'vue';
     import routes from '@/routes';
-    //import Notification from '@/components/Notification/Notification';
+    import { getUserId } from '@/helpers';
+    import Notification from '@/components/Notification/Notification';
     export default {
         name: 'Notifications',
         components: {
-            
+            Notification
         },
         setup() {
             const { notifications } = routes();
-            
             const notificationsObject = reactive({});
-             let args = {
-                    endPoint: "/notifications/3",
-                    method: 'GET',
-                }
+            const userId =  getUserId();
+            let args = {
+                endPoint: `/notifications/${userId}`,
+                method: 'GET',
+            }
             const userNotifications = async () => {
                 const { response:{ message:m, notifications:{ data} } } = await notifications(args);
                 notificationsObject.message = m
