@@ -13,6 +13,7 @@ const ForgotPassword = () => import('@/views/Auth/ForgotPassword.vue');
 const ResetPassword = () => import('@/views/Auth/ResetPassword.vue');
 const Notifications = () => import('@/views/Notifications/Notifications.vue');
 const Messages = () => import('@/views/Messages/Messages.vue');
+const Profile = () => import('@/views/Profile/Profile.vue');
 
 
 
@@ -46,6 +47,11 @@ const routes = [
         path: '/messages',
         name: 'Messages',
         component: Messages,
+      },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: Profile,
       },
     ]
   },
