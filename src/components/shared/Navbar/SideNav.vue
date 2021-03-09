@@ -45,35 +45,55 @@
         <div class="sidenav-top" :class="{'offback': showToolTip}">
             <ul class="sidenav-links">
                  <router-link :to="{path: '/'}" class="sidenav-item">
-                    <li class="sidenav-link">
-                        <span><i class='bx bx-home'></i></span>
-                        <span>Home</span>
-                    </li>
+                    <boxicon>
+                        <template v-slot:icon>
+                            <i class='bx bx-home'></i>
+                        </template>
+                        <template v-slot:iconName>
+                            Home
+                        </template>
+                    </boxicon>
+                    
                  </router-link>
                  <router-link to="#" class="sidenav-item">
-                    <li class="sidenav-link" >
-                       <span><i class='bx bx-folder'></i></span>
-                        <span>Dashboard</span>
-                    </li>
+                     <boxicon>
+                        <template v-slot:icon>
+                            <i class='bx bx-folder'></i>
+                        </template>
+                        <template v-slot:iconName>
+                            Dashboard
+                        </template>
+                    </boxicon>
                  </router-link>
                  <router-link :to=" {path: '/profile'} " class="sidenav-item">
-                    
-                   <li class="sidenav-link" >
-                       <span><i class='bx bx-user'></i></span>
-                        <span>Profile</span>
-                    </li>
+                    <boxicon>
+                        <template v-slot:icon>
+                            <i class='bx bx-user'></i>
+                        </template>
+                        <template v-slot:iconName>
+                            Profile
+                        </template>
+                    </boxicon>
                  </router-link>
                  <router-link :to="{path:  '/notifications'}" class="sidenav-item">
-                    <li class="sidenav-link" >
-                       <span><i class='bx bx-bell'></i></span>
-                        <span>Notifications</span>
-                    </li>
+                    <boxicon>
+                        <template v-slot:icon>
+                            <span><i class='bx bx-bell'></i></span>
+                        </template>
+                        <template v-slot:iconName>
+                            Notifications
+                        </template>
+                    </boxicon>
                  </router-link>
                  <router-link :to="{path:  '/messages'}" class="sidenav-item">
-                    <li class="sidenav-link" >
-                      <span><i class='bx bx-envelope'></i></span>
-                        <span>Messages</span>
-                    </li>
+                    <boxicon>
+                        <template v-slot:icon>
+                            <i class='bx bx-envelope'></i>
+                        </template>
+                        <template v-slot:iconName>
+                            Messages
+                        </template>
+                    </boxicon>
                  </router-link>               
             </ul>
         </div>
@@ -104,8 +124,12 @@
 <script>
     import { computed, ref } from 'vue';
     import { useStore } from 'vuex';
+    import boxicon from '../boxicon';
     export default {
         name: 'SideNav',
+        components: {
+            boxicon
+        },
 
         setup() {
             const showToolTip = ref(false);
