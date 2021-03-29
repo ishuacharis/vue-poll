@@ -1,11 +1,12 @@
 .sidenav{
     position: relative;
-    margin-right: 2rem;
+    padding-right: 2rem;
     min-height: inherit;
     background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-right: 2px solid #eee;
 }
 .offback{
     pointer-events: none;

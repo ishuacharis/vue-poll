@@ -6,7 +6,7 @@
                     <div class="logout">
                         <div class="logout-left">
                             <div class="avatar avatar-small">
-                                <img src="@/assets/vee.jpg" />
+                                <img src="@/assets/boy.jpg" />
                             </div>
                             <div class="handle">
                                 <span>{{  user.name }}</span>
@@ -103,7 +103,7 @@
                     <div class="logout">
                         <div class="logout-left">
                             <div class="avatar avatar-small">
-                                <img src="@/assets/vee.jpg" />
+                                <img src="@/assets/boy.jpg" />
                             </div>
                             <div class="handle">
                                 <span>{{  user.name }}</span>
