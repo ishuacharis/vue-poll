@@ -127,10 +127,6 @@
     align-self: center;
 }
 
-.avatar img{
-    border-radius: inherit;
-}
-
 .handle{
     display: flex;
     flex-direction: column;
