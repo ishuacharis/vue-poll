@@ -1,0 +1,59 @@
+<template>
+    <div class="profile">
+        <div class="profile-content">
+            <div class="profile-head">
+                <div class="profile-pic">
+                    <img :src="require('@/assets/boy.jpg')" alt="profile-picture">
+                    <span>
+                        <i class='bx bx-camera'></i>
+                    </span>
+                </div>
+            </div>
+            <div class="profile-body">
+                <div>
+                    <Form
+                        @submit="onFormSubmit"
+                        initial-value="formValues"
+                        v-slot="{isSubmitting}"
+                    >
+                        <div class="field__content">
+
+                            <div class="field">
+                                <Field name="name" type="text" class="input thin-border" as="input" />
+                            </div>
+                            <div class="field">
+                                <Field name="email" type="text" class="input thin-border" as="input" />
+                            </div>
+                            <div class="field">
+                                <Field name="phone_no" type="text" class="input thin-border" as="input" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <button type="submit" class="btn" v-if="!isSubmitting">Save</button>
+                            <div v-if="isSubmitting" class="loading"></div>
+                        </div>
+                    </Form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { Form, Field } from 'vee-validate';
+    export default {
+        components: { Form, Field },
+        setup() {
+
+            const onFormSubmit = (values) => {
+                console.log(values)
+            }
+            return{
+                formValues: {name: '', email: '', phone_no: ''},
+                onFormSubmit
+            }
+        }
+    }
+</script>
+
+<style src="./Profile.css" scoped></style>
