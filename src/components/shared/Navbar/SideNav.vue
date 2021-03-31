@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="sidenav"  @click="backgroundClick">
+    <div class="sidenav">
         <div class="logout__tooltip">
             <div class="logout-tooltip__content" :class="{'active': showToolTip}">
                 <div class="logout-tooltip__item">

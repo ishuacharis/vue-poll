@@ -1,31 +1,34 @@
 <template>
-  <div class="project" v-color="green">
-    <MyVote
-      :totalVotes= "totalvotes"
-      :remainingVotes= "remainingvotes"/>
-    <div class="content">
-      <div class="center">
-        <div class="avatar">
-          <img :src="require(`@/assets/${housemate.avatar}`)" alt="">
-        </div>
-        <div class="name">
-          {{housemate.screen_name}}
-        </div>
-        <div class="controls">
-          <div class="control" @click="onVoteIncre">
-            <span>+</span>
+  <div class="project">
+    <div class="housemate">
+
+      <MyVote
+        :totalVotes= "totalvotes"
+        :remainingVotes= "remainingvotes"/>
+      <div class="content">
+        <div class="center">
+          <div class="avatar">
+            <img :src="require(`@/assets/${housemate.avatar}`)" alt="">
           </div>
-          <div class="control">
-            <input type="text" :value="voteCount" disabled  />
+          <div class="name">
+            {{housemate.screen_name}}
           </div>
-          <div class="control" @click="onVoteDecre">
-            <span>-</span>
+          <div class="controls">
+            <div class="control" @click="onVoteIncre">
+              <span>+</span>
+            </div>
+            <div class="control">
+              <input type="text" :value="voteCount" disabled  />
+            </div>
+            <div class="control" @click="onVoteDecre">
+              <span>-</span>
+            </div>
           </div>
-        </div>
-        <div class="buttons">
-          <router-link class="btn btn-primary" :to="{name: 'Housemates'}">Back</router-link>
-          <button type="submit" class="btn btn-primary" @click="submit" v-if="!isLoading">Cast Vote</button>
-          <div v-if="isLoading" class="loading"></div>
+          <div class="buttons">
+            <router-link class="btn btn-primary" :to="{name: 'Housemates'}">Back</router-link>
+            <button type="submit" class="btn btn-primary" @click="submit" v-if="!isLoading">Cast Vote</button>
+            <div v-if="isLoading" class="loading"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +36,7 @@
 </template>
 
 <script>
-  import {ref, computed, onBeforeUnmount} from 'vue';
+  import {ref, computed, onBeforeUnmount,} from 'vue';
   import { useStore } from 'vuex';
   import {useRoute, useRouter} from 'vue-router';
   import {getUser} from '@/data/data';
@@ -50,6 +53,7 @@
       MyVote
     },
      async setup() { 
+      const totalvotes = ref(0);
       const store = useStore();
       const router  = useRouter();
       const { vote } = routes();
@@ -65,6 +69,8 @@
       const voteCount =  ref(0)
       const token  = getToken()
       const userId  = getUserId()
+
+  
 
       const onVoteIncre = () => {
         if(store.state.votes.votesLeft > 0 && store.state.votes.votesLeft <= 100){ 
@@ -117,10 +123,11 @@
         }
       }
 
+    
       
       return  {
         housemate,
-        totalvotes: computed(() => store.getters['votes/totalVotes']),
+        totalvotes,
         remainingvotes: computed(() => store.getters['votes/remainingVotes']),
         onVoteIncre,
         onVoteDecre,

@@ -17,6 +17,9 @@
     components: {
       HousemateList
     },
+    provide: {
+      user: "olawale Ogun"
+    },
     setup() {
       
       const store =  useStore();

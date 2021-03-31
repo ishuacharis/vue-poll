@@ -1,3 +1,7 @@
+:root{
+  --default-bg-color: rgba(235, 117, 117, 0.651);
+  --font-color: #700505;
+}
 * {
   margin: 0;
   padding: 0;
@@ -121,6 +125,7 @@ button {
   inset -1px -2px 8px rgba(255, 255, 255, 0.5);
 }
 
+/** BUTTONS */
 .button {
   display: inline-block;
   padding: 0.8rem 1.8rem;
@@ -143,6 +148,23 @@ button {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5) inset,
   -4px -4px 6px rgba(255, 255, 255, 0.5) inset;
 }
+.btn {
+  font-weight: bold;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25),
+  -4px 0px 8px rgba(0, 0, 0, 0.25);
+  padding: 0.8rem 1.8rem;
+  transition: box-shadow 700ms ease-in-out;
+}
+
+.btn:hover{
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.35);
+}
+
+.btn-secondary {
+  background-color: var(--default-bg-color);
+  color: #fff;
+}
+
 .hide{
   display: none;
   visibility: hidden;

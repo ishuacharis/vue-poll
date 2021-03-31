@@ -19,17 +19,17 @@
                         <div class="field__content">
 
                             <div class="field">
-                                <Field name="name" type="text" class="input thin-border" as="input" />
+                                <Field name="name" type="text" class="input thin-border" as="input" :value="name" />
                             </div>
                             <div class="field">
-                                <Field name="email" type="text" class="input thin-border" as="input" />
+                                <Field name="email" type="text" class="input thin-border" as="input" :value="email" />
                             </div>
                             <div class="field">
-                                <Field name="phone_no" type="text" class="input thin-border" as="input" />
+                                <Field name="phone_no" type="text" class="input thin-border" as="input" :value="phone_no" />
                             </div>
                         </div>
                         <div class="field">
-                            <button type="submit" class="btn" v-if="!isSubmitting">Save</button>
+                            <button type="submit" class="btn btn-secondary" v-if="!isSubmitting">Save</button>
                             <div v-if="isSubmitting" class="loading"></div>
                         </div>
                     </Form>
@@ -41,6 +41,7 @@
 
 <script>
     import { Form, Field } from 'vee-validate';
+    import { info} from "@/helpers"; 
     export default {
         components: { Form, Field },
         setup() {
@@ -48,9 +49,12 @@
             const onFormSubmit = (values) => {
                 console.log(values)
             }
+            const { name,email, phone_no } = info();
+            console.log(name)
             return{
                 formValues: {name: '', email: '', phone_no: ''},
-                onFormSubmit
+                onFormSubmit,
+                name,email,phone_no
             }
         }
     }

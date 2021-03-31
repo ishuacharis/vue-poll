@@ -1,5 +1,5 @@
 <template  lang="html">
-    <div class="notification" >
+    <div class="notification">
         {{ type }}
     </div>
 </template>
@@ -15,7 +15,7 @@
             const { notification } = toRefs(props)
             let { type } = notification.value
             if (type == 'UserLoginNotification') {
-                type = "You have just logged in"
+                type = "Last loggedin"
             }
             return{
                 type

@@ -8,6 +8,7 @@
 
 <script>
   import Housemate from '@/components/Housemate/Housemate';
+  import { inject } from 'vue';
   export default {
     name: 'HousemateList',
     components: {
@@ -17,7 +18,13 @@
       houseMates: Array,
     },
     setup() {
-     
+      const user  = inject('user')
+      const greeting  = inject('greeting',)
+      console.log(greeting.morning("sola")) 
+      console.log(user)
+      return {
+        
+      }
     }
   };
 </script>
