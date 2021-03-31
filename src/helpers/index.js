@@ -26,9 +26,7 @@ export const isLoggedIn = () => {
 };
 
 export const getToken = () => {
-    
     return store.getters['auth/token'] ;
-    //.state.auth.token
 }
 
 export const getUserId = () => {
@@ -45,6 +43,9 @@ export const setEviction = (args) => {
     localStorage.setItem(HOUSEMATES, JSON.stringify(args))
 }
 
-
+export const info = () => {
+    
+    return JSON.parse(localStorage.getItem("USER")); 
+}
 
 
