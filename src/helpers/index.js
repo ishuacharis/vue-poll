@@ -29,10 +29,6 @@ export const getToken = () => {
     return store.getters['auth/token'] ;
 }
 
-export const getUserId = () => {
-    
-    return store.state.auth.user.id || null
-}
 
 export const housemates = () => {
     
@@ -45,7 +41,7 @@ export const setEviction = (args) => {
 
 export const info = () => {
     
-    return JSON.parse(localStorage.getItem("USER")); 
+    return store.getters['auth/user'] ;
 }
 
 
