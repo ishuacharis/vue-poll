@@ -45,7 +45,6 @@
   import routes from '@/routes';
   import schema from '@/schema';
   import { useStore } from 'vuex';
-  import { setUser, setToken } from '../../helpers';
   import { useRouter } from 'vue-router';
   import { auth } from '@/store/auth/actions/action_creators';
   export default {
@@ -72,8 +71,6 @@
           
           const response = await register(args);
           if('response' in response) {
-            setUser(response["response"]["user"]);
-            setToken(response["response"]["token"]);
             store.dispatch(auth(response["response"]))
             router.replace("/housemates")
           }

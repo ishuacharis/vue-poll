@@ -35,7 +35,6 @@
     import routes from '@/routes';
     import { useRouter } from 'vue-router';
     import { auth } from '@/store/auth/actions/action_creators';
-    import { setUser, setToken } from '@/helpers';
     
     export default {
         name: "ResetPassword",
@@ -60,8 +59,6 @@
                 try {
                     const response = await resetPassword(args)
                     if('response' in response) {
-                        setUser(response["response"]["user"]);
-                        setToken(response["response"]["token"]);
                         store.dispatch(auth(response["response"]))
                         router.replace('/housemates');
                     }

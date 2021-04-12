@@ -45,7 +45,6 @@
   import InputField from '@/components/shared/InputField';
   import schema from '@/schema';
   import routes from '@/routes';
-  import { setUser, setToken } from '@/helpers';
   import { auth } from '@/store/auth/actions/action_creators';
   export default {
     components: {Form,InputField,},
@@ -71,8 +70,6 @@
         try {
           const response = await login(args)
           if('response' in response) {
-            setUser(response["response"]["user"]);
-            setToken(response["response"]["token"]);
             store.dispatch(auth(response["response"]))
             resetForm()
             router.replace('/');
