@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
 import { getters } from './global/getters';
 import { actions }  from './global/actions';
 import { mutations } from './global/mutations';
@@ -14,7 +15,8 @@ const store = createStore({
   modules: {
     votes: voteModule,
     auth: authModule
-  }
+  },
+  plugins: [createPersistedState()]
 })
 
 
