@@ -1,5 +1,6 @@
 const USER = "user";
 const TOKEN = "token";
+const LOGGEDIN = "isLoggedIn";
 export const authAction = {
     login({ commit  }, { credentials: { user, token } }) {
         commit({
@@ -9,6 +10,10 @@ export const authAction = {
         commit({
             type: TOKEN,
             credentials: token
+        })
+        commit({
+            type: LOGGEDIN,
+            credentials: true
         })
     },
 
