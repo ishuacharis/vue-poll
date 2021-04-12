@@ -16,7 +16,9 @@ const store = createStore({
     votes: voteModule,
     auth: authModule
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    paths: ['votes', 'auth']
+  })]
 })
 
 
