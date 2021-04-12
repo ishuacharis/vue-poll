@@ -4,14 +4,6 @@ const USER = "USER";
 const TOKEN = 'TOKEN';
 const HOUSEMATES = 'HOUSEMATES';
 
-export const setUser = (args) => {
-    localStorage.setItem(USER, JSON.stringify(args))
-}
-
-export const setToken  = (args) => {
-    localStorage.setItem(TOKEN, args) 
-}
-
 export const deleteUser =  () => {
     localStorage.removeItem(USER);
 }
@@ -42,6 +34,7 @@ export const setEviction = (args) => {
 export const info = () => {
     
     return store.getters['auth/user'] ;
+
 }
 
 
