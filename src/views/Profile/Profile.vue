@@ -50,7 +50,6 @@
                 console.log(values)
             }
             const { name,email, phone_no } = info();
-            console.log(name)
             return{
                 formValues: {name: '', email: '', phone_no: ''},
                 onFormSubmit,
