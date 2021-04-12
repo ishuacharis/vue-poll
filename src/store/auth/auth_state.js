@@ -1,7 +1,7 @@
 export const authState = () => {
     return {
-        user: JSON.parse(localStorage.getItem('USER')) || '',
-        token: localStorage.getItem('TOKEN') || '',
+        user: null,
+        token: null,
         isAuthenticating: false,
         isLoggingOut: false
     }

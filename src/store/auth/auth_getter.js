@@ -1,3 +1,4 @@
+
 export const authGetter = {
 
     isLoggedIn(state) {

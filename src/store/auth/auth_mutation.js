@@ -1,11 +1,11 @@
 export const authMutation = {
-    login(state,payload) {
-        state.user = payload.credentials.user;
-        state.token = payload.credentials.token;
-       
-    },
-    logout(state) {
-        state.user  = '';
-        state.token = '';
+    isAuthenticating: (state,{credentials}) => state.isAuthenticating = credentials,
+    user: (state,{credentials}) => state.user =  credentials,
+    token: (state,{credentials}) => state.token =  credentials,
+    isLoggingOut: (state,{credentials}) => state.isLoggingOut = credentials,
+    logout: (state) => {
+        state.user  = null;
+        state.token = null;
     }
-};
+    
+}; 

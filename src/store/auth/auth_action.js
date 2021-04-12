@@ -1,17 +1,22 @@
+const USER = "user";
+const TOKEN = "token";
 export const authAction = {
-    login(context, payload) {
-        let action = payload.type.split("/")[1];
-        return context.commit({
-            type: action,
-            credentials: payload.credentials
-        });
+    login({ commit  }, { credentials: { user, token } }) {
+        commit({
+            type: USER,
+            credentials: user
+        })
+        commit({
+            type: TOKEN,
+            credentials: token
+        })
     },
 
-    logout(context,payload) {
+    logout({ commit }, payload) {
         let action = payload.type.split("/")[1];
-        return context.commit({
+        commit({
             type: action,
             credentials: payload.credentials
         });
-    }
+    } 
 };
