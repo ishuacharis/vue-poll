@@ -1,8 +1,7 @@
-export const authState = () => {
-    return {
-        user: null,
-        token: null,
-        isAuthenticating: false,
-        isLoggingOut: false
-    }
-};
+export const authState = () => ({
+    user: null,
+    token: null,
+    isLogggedIn: false,
+    isAuthenticating: false,
+    isLoggingOut: false
+});
