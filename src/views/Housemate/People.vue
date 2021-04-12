@@ -42,7 +42,7 @@
   import {getUser} from '@/data/data';
   //import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
   import routes from '@/routes';
-  import { getToken , getUserId} from '@/helpers';
+  import { getToken , info} from '@/helpers';
   import MyVote from '@/components/MyVote/MyVote.vue';
   import { setUserRemainingVotes, setUserVotesLeft } from '../../store/vote/actions/action_creators';
 
@@ -68,9 +68,7 @@
       
       const voteCount =  ref(0)
       const token  = getToken()
-      const userId  = getUserId()
-
-  
+      const { id }  = info()
 
       const onVoteIncre = () => {
         if(store.state.votes.votesLeft > 0 && store.state.votes.votesLeft <= 100){ 
@@ -97,7 +95,7 @@
       const submit  = async () => {
         isLoading.value = true
         const data = {
-          user_id: userId,
+          user_id: id,
           housemate_id: housemate.value.id,
           platform_id: 1,
           amount: voteCount.value,
