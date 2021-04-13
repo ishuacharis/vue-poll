@@ -1,16 +1,6 @@
 import store from '../store';
 
-const USER = "USER";
-const TOKEN = 'TOKEN';
-//const HOUSEMATES = 'HOUSEMATES';
 
-export const deleteUser =  () => {
-    localStorage.removeItem(USER);
-}
-
-export const deleteToken =  () => {
-    localStorage.removeItem(TOKEN);
-}
 
 
 export const isLoggedIn = () => {    
