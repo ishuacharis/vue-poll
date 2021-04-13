@@ -7,7 +7,7 @@
 
 <script>
   import { useStore } from 'vuex';
-  import {onUnmounted, ref, computed, onMounted} from 'vue'
+  import {onUnmounted, computed, onMounted} from 'vue'
   import HousemateList from '@/components/HousemateList/HousemateList.vue'
   import { getToken } from '@/helpers';
   import { setHousemates } from '../../store/vote/actions/action_creators';
@@ -23,7 +23,6 @@
       
       const store =  useStore();
       const token  = getToken();
-      const isLoading =  ref(true);
       let args = {
         endPoint: "/eviction",
         method: 'GET',
@@ -31,7 +30,6 @@
       }
       const storeAsync = async () => {
         await store.dispatch(setHousemates(args));
-        isLoading.value = false
       }
       onMounted(storeAsync)
       onUnmounted(() => {
@@ -40,8 +38,8 @@
       
     return {
       storeAsync,
-      isLoading,
-      houseMatesObj: computed(() => store.getters["votes/houseMates"])
+      houseMatesObj: computed(() => store.getters["votes/houseMates"]),
+      isLoading: computed(() => store.getters.loading)
     }
   }
 }
