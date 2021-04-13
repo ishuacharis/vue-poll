@@ -1,4 +1,5 @@
-
+import routes from '@/routes';
+const { eviction } = routes();
 
 export const voteActions  = {
 
@@ -55,12 +56,13 @@ export const voteActions  = {
             command: command
         });
     },
-    setHousemates(context,{type,command}) {
-        let action =  type.split("/")[1]
-        return context.commit({
+    async setHousemates({ commit },{ type,credentials }) {
+        let action =  type.split("/")[1];
+        const {response: { data } } = await eviction(credentials);
+        commit({
             type: action,
-            command: command
+            credentials: data
         });
     }
 
-};
+}; 

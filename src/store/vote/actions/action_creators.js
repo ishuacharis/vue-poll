@@ -40,5 +40,5 @@ export const setUserVotesLeft = (payload) => ({
 
 export const setHousemates = (payload) => ({
     type: SET_HOUSEMATES,
-    command: payload
+    credentials: payload
 })

@@ -30,7 +30,7 @@ export const voteMutations = {
         })
     },
     setHousemates(state,payload) {
-        state.houseMates = payload.houseMates
+        state.houseMates = payload.credentials
     },
     setRemainingVotes(state, payload) {
         if(payload.command === 'increase') state.remainingVotes -= 10;
