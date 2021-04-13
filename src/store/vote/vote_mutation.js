@@ -55,5 +55,5 @@ export const voteMutations = {
             if(command === 'decrease')  state.votesLeft += 10;
         //}
         
-    }
+    },
 };

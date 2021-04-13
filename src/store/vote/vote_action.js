@@ -56,13 +56,17 @@ export const voteActions  = {
             command: command
         });
     },
-    async setHousemates({ commit },{ type,credentials }) {
+    async setHousemates({dispatch, commit },{ type,credentials }) {
+
+        dispatch({type: 'loading', credentials: true}, {root: true });
+        
         let action =  type.split("/")[1];
         const {response: { data } } = await eviction(credentials);
         commit({
             type: action,
             credentials: data
         });
+        dispatch({type: 'loading', credentials: false}, {root: true });
     }
 
 }; 
