@@ -11,9 +11,8 @@
 </template>
 
 <script>
-    import { ref } from 'vue';
-    import routes  from '@/routes';
-    import { getToken, deleteToken, deleteUser  } from '@/helpers';
+    import { computed, ref } from 'vue';
+    import { getToken,  } from '@/helpers';
     import { useRouter } from 'vue-router';
     import { useStore } from 'vuex';
     import { unauth } from '@/store/auth/actions/action_creators';
@@ -24,37 +23,26 @@
         setup() {
             const store  = useStore();
             let error  = ref(null);
-            let isLoading  =  ref(false);
-            const {logout} = routes();
             const router  = useRouter();
             const token  = getToken();
             const goBack = () => {
                 router.back();
             }
-            const signOut =  async () => {
-                isLoading.value = true;
+            const signOut =  () => {
                 let args = {
                     endPoint: "/logout",
                     method: 'POST',
                     token: token
                 };
-                try {
-                    
-                    const response = await logout(args);
-                    if ('response' in response) {
-                        isLoading.value  = false;
-                        deleteUser();
-                        deleteToken();
-                        store.dispatch(unauth(''))
-                        router.replace('/auth')
-                    }
-                } catch (e) {
-                    error.value = e.message;
-                    console.log(e.message)
-                }
+                store.dispatch(unauth(args)).then(() => {
+                    router.replace('/auth')
+                }).catch((e) => {
+                    error.value = e;
+                } );
             };
             return {
-                signOut, isLoading, goBack, error
+                signOut, goBack, error,
+                isLoading: computed(() => store.getters.loading)
             }
         }
         
