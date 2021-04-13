@@ -20,7 +20,7 @@ const guestGuard = (to, from, next) => {
     if(to.matched.some(record =>  record.meta.guest )) {
         if( isLoggedIn() ) {
             next({
-                path: "/housemates"
+                path: "/"
             });
         } else{
             next();
