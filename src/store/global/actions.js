@@ -1,11 +1,16 @@
 export let actions = {
 
-    increment(context, payload) {
-        console.log(context);
-        return context.commit({
-            type: payload.type,
-            amount: payload.amount
+    increment({ commit  }, { type, amount  }) {
+        commit({
+            type: type,
+            amount: amount
         });
+    },
+    loading({ commit }, { type, credentials }) {   
+        commit({
+            type: type,
+            credentials: credentials
+        })
     }
 
 }

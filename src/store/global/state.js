@@ -1,7 +1,6 @@
-export const state = () => {
-    return {
-        count: 4,
-        todos: ["running"],
-        totalVotes: 70000
-    }
-}
+export const state = () => ({
+    count: 4,
+    todos: ["running"],
+    totalVotes: 70000,
+    isLoading: false
+})

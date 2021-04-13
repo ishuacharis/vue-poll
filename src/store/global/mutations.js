@@ -1,5 +1,4 @@
 export let mutations = {
-    increment(state,payload){
-        state.count += payload.amount
-    }
+    increment: (state,{ amount }) => state.count += amount ,
+    loading: (state, { credentials }) => state.isLoading = credentials
 }

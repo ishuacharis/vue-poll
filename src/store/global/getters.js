@@ -1,8 +1,7 @@
 export let getters  = {
-    count(state) {
-        return state.count + 20;
-    },
-    todos(state) {
-        return state.todos;
-    }
+    count: (state) => state.count + 20,
+    
+    todos: (state) => state.todos,
+    
+    loading: (state) => state.isLoading,
 }
