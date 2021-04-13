@@ -21,8 +21,8 @@
     import { pusherClient } from '@/Context/PusherContext';
     import { onMounted, reactive, ref} from 'vue';
     import routes from '@/routes';
-    import { getUserId } from '@/helpers';
     import Notification from '@/components/Notification/Notification';
+    import { info } from '@/helpers';
     export default {
         name: 'Notifications',
         components: {
@@ -32,10 +32,11 @@
             const { notifications } = routes();
             const notificationsObject = reactive({});
             const isLoading = ref(true);
-            const userId =  getUserId();
+            const { id } =  info();
             const count  = ref(10)
+            
             let args = {
-                endPoint: `/notifications/${userId}`,
+                endPoint: `/notifications/${id}`,
                 method: 'GET',
             }
             const userNotifications = async () => {
