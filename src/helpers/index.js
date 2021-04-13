@@ -2,7 +2,7 @@ import store from '../store';
 
 const USER = "USER";
 const TOKEN = 'TOKEN';
-const HOUSEMATES = 'HOUSEMATES';
+//const HOUSEMATES = 'HOUSEMATES';
 
 export const deleteUser =  () => {
     localStorage.removeItem(USER);
@@ -27,14 +27,8 @@ export const housemates = () => {
     return  JSON.parse(localStorage.getItem('HOUSEMATES')) || null
 }
 
-export const setEviction = (args) => {
-    localStorage.setItem(HOUSEMATES, JSON.stringify(args))
-}
-
 export const info = () => {
     
     return store.getters['auth/user'] ;
 
 }
-
-
