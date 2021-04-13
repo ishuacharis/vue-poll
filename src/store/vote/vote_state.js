@@ -1,10 +1,9 @@
-import { totalVotes, houseMatesUpForEviction } from '../../data/data';
+import { totalVotes, } from '../../data/data';
 
-export const voteStates = () => {
-    return{
-        totalVotes: JSON.parse(localStorage.getItem('VOTES')) || totalVotes,
-        houseMates: JSON.parse(localStorage.getItem('HOUSEMATES') ) || houseMatesUpForEviction,
-        remainingVotes: JSON.parse(localStorage.getItem('VOTES')) || totalVotes,
-        votesLeft: JSON.parse(localStorage.getItem('VOTES'))
-    }
-}; 
+//houseMates: JSON.parse(localStorage.getItem('HOUSEMATES') ) || houseMatesUpForEviction,
+export const voteStates = () => ({
+    totalVotes: JSON.parse(localStorage.getItem('VOTES')) || totalVotes,
+    houseMates: null,
+    remainingVotes: JSON.parse(localStorage.getItem('VOTES')) || totalVotes,
+    votesLeft: JSON.parse(localStorage.getItem('VOTES'))
+}); 
