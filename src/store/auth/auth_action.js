@@ -1,6 +1,9 @@
+import routes from '@/routes';
+const { logout } = routes();
 const USER = "user";
 const TOKEN = "token";
 const LOGGEDIN = "isLoggedIn";
+
 export const authAction = {
     login({ commit  }, { credentials: { user, token } }) {
         commit({
@@ -17,11 +20,19 @@ export const authAction = {
         })
     },
 
-    logout({ commit }, payload) {
-        let action = payload.type.split("/")[1];
-        commit({
-            type: action,
-            credentials: payload.credentials
-        });
+    logout({dispatch, commit }, {  type, credentials }) {
+        let action = type.split("/")[1];
+        
+        dispatch({ type: "loading", credentials: true }, { root: true });
+        
+        return logout(credentials).then(() => {
+            
+            commit({type: action,});
+            
+            dispatch({ type: "loading", credentials: false }, { root: true });
+        }).catch(() => {
+            
+            dispatch({ type: "loading", credentials: false }, { root: true });
+        })
     } 
 };

@@ -7,6 +7,9 @@ export const authMutation = {
     logout: (state) => {
         state.user  = null;
         state.token = null;
+        state.isLogggedIn = false,
+        state.isAuthenticating = false,
+        state.isLoggingOut = false
     }
     
 }; 
