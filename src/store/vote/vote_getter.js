@@ -1,15 +1,9 @@
 export let voteGetters = {
-    totalVotes(state) {
-        return state.totalVotes;
-    },
-    houseMates(state){
-        return state.houseMates;
-    },
+    totalVotes: (state) => state.totalVotes,
+    
+    houseMates: (state) => state.houseMates,
 
-    remainingVotes(state) {
-        return state.remainingVotes;
-    },
-    votesLeft(state) {
-        return state.votesLeft;
-    }
+    remainingVotes: (state) => state.remainingVotes,
+    
+    votesLeft: (state) => state.votesLeft
 };
