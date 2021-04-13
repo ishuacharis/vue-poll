@@ -1,5 +1,5 @@
 <template lang="html">
-  <HousemateList :houseMates="houseMatesObj.houseMates" v-if="!isLoading" />
+  <HousemateList :houseMates="houseMatesObj" v-if="!isLoading" />
   <div v-if="isLoading" class="loading-container">
     <div class="loading"></div>
   </div>
@@ -7,10 +7,9 @@
 
 <script>
   import { useStore } from 'vuex';
-  import {onUnmounted,onMounted, ref, reactive} from 'vue'
+  import {onUnmounted, ref, computed, onMounted} from 'vue'
   import HousemateList from '@/components/HousemateList/HousemateList.vue'
-  import { getToken, setEviction } from '@/helpers';
-  import routes from '@/routes';
+  import { getToken } from '@/helpers';
   import { setHousemates } from '../../store/vote/actions/action_creators';
   export default {
     name: 'Housemates',
@@ -24,31 +23,25 @@
       
       const store =  useStore();
       const token  = getToken();
-      const { eviction } = routes();
       const isLoading =  ref(true);
-      const houseMatesObj = reactive({});
       let args = {
         endPoint: "/eviction",
         method: 'GET',
         token: token
       }
-      const getHousemates = async () => {
-        const { response:{data} } =  await eviction(args);
-        houseMatesObj.houseMates = data
-        store.dispatch(setHousemates(houseMatesObj))
-        setEviction(houseMatesObj.houseMates)
-        isLoading.value = false;
+      const storeAsync = async () => {
+        await store.dispatch(setHousemates(args));
+        isLoading.value = false
       }
-
-      onMounted(getHousemates)
+      onMounted(storeAsync)
       onUnmounted(() => {
         console.log("left")
       })
       
     return {
-      houseMatesObj,
+      storeAsync,
       isLoading,
-      getHousemates
+      houseMatesObj: computed(() => store.getters["votes/houseMates"])
     }
   }
 }
