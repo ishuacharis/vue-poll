@@ -1,31 +1,55 @@
 <template lang="html">
     <div class="field">
-        <Field 
-            :name="props.name" 
-            :type="props.type" 
-            class="input"  
-            as ="input"
-            :placeholder="props.placeholder" />
-        <ErrorMessage :name="props.name" class="error" />
+        <input 
+            :name="name"
+            :placeholder="placeholder"
+            :type="type"
+            :value="InputValue"
+            class="input"
+            @input="handleChange"
+            @blur="handleBlur"
+        />
+        <p v-show="errorMessage || meta.valid">
+            {{ errorMessage }}
+        </p>
     </div>
 </template>
 
 <script>
-    import {Field,ErrorMessage} from 'vee-validate'
+    import { toRefs } from 'vue';
+    import {useField} from 'vee-validate'
     export default {
         name: 'InputField',
-        components: {
-            Field, ErrorMessage
-        },
+        components: { },
         props: {
-            placeholder: String,
-            type: String,
-            name: String,
-            error: Object,
-            
+            placeholder: {
+                type: String,
+                required: true
+            },
+            type: {
+                type:String,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            value: {
+                type: String,
+                default: ""
+            }            
         },
         setup(props) {
-            return {props}
+            const { name,value } = toRefs(props);
+            const { value: InputValue, errorMessage, handleChange, handleBlur,meta  } 
+             = useField(
+                name, undefined, {
+                    initialValue: value
+                }
+            );
+            return {
+                InputValue, errorMessage, handleChange, handleBlur, meta,
+            }
         }
     }
 </script>
