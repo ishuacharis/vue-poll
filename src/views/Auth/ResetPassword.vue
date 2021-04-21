@@ -7,7 +7,7 @@
                     <Form 
                         @submit="onFormSubmit" 
                         :initial-values= "formValues"
-                        :validation-schema="resetPasswordSchema" 
+                        :validation-schema="resetPasswordFormValues" 
                         v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
                     >
                     <div class="field__content">
@@ -31,7 +31,7 @@
     import {Form,} from  'vee-validate';
     import InputField from '@/components/shared/InputField';
     import { useStore } from 'vuex';
-    import schema from '@/schema';
+    import { resetPasswordSchema,resetPasswordFormValues } from '@/schema';
     import routes from '@/routes';
     import { useRouter } from 'vue-router';
     import { auth } from '@/store/auth/actions/action_creators';
@@ -43,7 +43,7 @@
             const error =  ref(null);
             const { resetPassword } = routes();
             const store =  useStore();
-            const { resetPasswordSchema } = schema();
+            
             const router = useRouter();
             const onFormSubmit = async (values) => {
                 const data = {
@@ -69,7 +69,7 @@
             };
 
             return  {
-                formValues:  { token: '', email: '',  password: ''},
+                resetPasswordFormValues,
                 resetPasswordSchema,
                 onFormSubmit,
                 error

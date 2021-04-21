@@ -13,7 +13,7 @@
         <div class="error" v-if="error">{{ error }}</div>  
         <Form 
           @submit="onFormSubmit" 
-          :initial-values= "formValues"
+          :initial-values= "loginFormValues"
           :validation-schema="loginSchema" 
           v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
           >
@@ -43,7 +43,7 @@
   import { useStore } from 'vuex';
   import {Form,} from  'vee-validate';
   import InputField from '@/components/shared/InputField';
-  import schema from '@/schema';
+  import {  loginSchema , loginFormValues} from '@/schema';
   import routes from '@/routes';
   import { auth } from '@/store/auth/actions/action_creators';
   export default {
@@ -52,7 +52,7 @@
     setup(){ 
       const error = ref(null);
       const {login} = routes();
-      const {loginSchema} = schema();
+      
       const router = useRouter();
       const store =  useStore() ;
       
@@ -84,7 +84,7 @@
       return {
         loginSchema, 
         onFormSubmit,
-        formValues:  { email: '', password: '' },
+        loginFormValues,
         error
       }
     }

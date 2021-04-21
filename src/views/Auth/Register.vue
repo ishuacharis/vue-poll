@@ -12,7 +12,7 @@
           <Form 
             @submit="onFormSubmit" 
             :validation-schema="registerSchema" 
-            :initial-values="formValues"
+            :initial-values="registerFormValues"
             v-slot="{ errors, isSubmitting, meta: {dirty, valid} }">
             <div class="field__content">
               <InputField name="name" type="name" placeholder="Name" :error="errors" />
@@ -43,7 +43,7 @@
   import {Form,} from  'vee-validate';
   import InputField from '@/components/shared/InputField';
   import routes from '@/routes';
-  import schema from '@/schema';
+  import { registerSchema ,registerFormValues } from '@/schema';
   import { useStore } from 'vuex';
   import { useRouter } from 'vue-router';
   import { auth } from '@/store/auth/actions/action_creators';
@@ -51,7 +51,7 @@
     components: {Form,InputField},
     setup() {     
       const error = ref(null);
-      const {registerSchema} = schema();
+    
       const {register} = routes();
       const store = useStore();
       const router = useRouter();
@@ -82,7 +82,7 @@
       return {
         registerSchema,
         onFormSubmit,
-        formValues:  { name: '', email: '', phoneNo: '', password: '' },
+        registerFormValues,
         error
       };
     }

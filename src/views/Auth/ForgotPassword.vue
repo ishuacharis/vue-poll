@@ -6,7 +6,7 @@
                     <div class="error" v-if="error">{{ error }}</div>         
                     <Form 
                     @submit="onFormSubmit" 
-                    :initial-values= "formValues"
+                    :initial-values= "forgotPasswordFormValues"
                     :validation-schema="forgotPasswordSchema" 
                     v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
                     >
@@ -30,7 +30,7 @@
     import { useRouter } from 'vue-router';
    
     import InputField from '@/components/shared/InputField';
-    import schema from '@/schema';
+    import { forgotPasswordSchema, forgotPasswordFormValues } from '@/schema';
     import routes from '@/routes';
 
     export default {
@@ -40,7 +40,7 @@
             const error = ref(null);
             const router  = useRouter();
             const { forgotPassword } = routes();
-            const { forgotPasswordSchema } = schema();
+           
             const onFormSubmit = async (values) => {
                 const data = {
                     email: values.email
@@ -62,7 +62,7 @@
             };
 
             return  {
-                formValues:  { email: '',  },
+               forgotPasswordFormValues,
                 forgotPasswordSchema,
                 onFormSubmit,
                 error
