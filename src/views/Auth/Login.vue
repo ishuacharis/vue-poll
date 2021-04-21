@@ -12,16 +12,14 @@
         </div>
         <div class="error" v-if="error">{{ error }}</div>  
         <Form 
-          @submit="onFormSubmit" 
-          :initial-values= "loginFormValues"
-          :validation-schema="loginSchema" 
-          v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
+            @submit="onFormSubmit" 
+            :initial-values= "loginFormValues"
+            :validation-schema="loginSchema" 
+            v-slot="{ isSubmitting, meta: {dirty, valid}}"
           >
           <div class="field__content">
-            <InputField name="email" type="email" placeholder="Email" :error="errors" />
-            <InputField name="password" type="password"  placeholder="Password" 
-            :error="errors"  />
-            
+            <InputField name="email" type="email" placeholder="Email" />
+            <InputField name="password" type="password"  placeholder="Password" />
           </div>
           <div class="link">
             <router-link :to="{path: '/forgot-password' }" class="link-item">Forgot password?</router-link>

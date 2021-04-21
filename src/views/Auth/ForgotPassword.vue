@@ -5,13 +5,13 @@
                 <div class="auth">
                     <div class="error" v-if="error">{{ error }}</div>         
                     <Form 
-                    @submit="onFormSubmit" 
-                    :initial-values= "forgotPasswordFormValues"
-                    :validation-schema="forgotPasswordSchema" 
-                    v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
+                        @submit="onFormSubmit" 
+                        :initial-values= "forgotPasswordFormValues"
+                        :validation-schema="forgotPasswordSchema" 
+                        v-slot="{ isSubmitting, meta: {dirty, valid}}"
                     >
                     <div class="field__content">
-                        <InputField name="email" type="email" placeholder="Email" :error="errors" />                        
+                        <InputField name="email" type="email" placeholder="Email" />                        
                     </div>
                     <div class="field">
                         <button class="btn"  :disabled="!(dirty && valid) || isSubmitting" v-if="!isSubmitting">Reset</button>

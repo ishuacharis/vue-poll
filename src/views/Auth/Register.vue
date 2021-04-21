@@ -13,12 +13,12 @@
             @submit="onFormSubmit" 
             :validation-schema="registerSchema" 
             :initial-values="registerFormValues"
-            v-slot="{ errors, isSubmitting, meta: {dirty, valid} }">
+            v-slot="{  isSubmitting, meta: {dirty, valid} }">
             <div class="field__content">
-              <InputField name="name" type="name" placeholder="Name" :error="errors" />
-              <InputField name="email" type="text" placeholder="Email" :error="errors" />
-              <InputField name="phoneNo" type="text" placeholder="Phone no" :error="errors" />
-              <InputField name="password" type="password"  placeholder="Password" :error="errors" />
+              <InputField name="name" type="name" placeholder="Name"  />
+              <InputField name="email" type="text" placeholder="Email"  />
+              <InputField name="phoneNo" type="text" placeholder="Phone no"  />
+              <InputField name="password" type="password"  placeholder="Password"  />
             </div>
             <div class="link">
               <router-link :to="{path: '/auth', query: {a: 'login'}}" class="link-item">Already have an account?</router-link>

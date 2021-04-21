@@ -8,12 +8,12 @@
                         @submit="onFormSubmit" 
                         :initial-values= "formValues"
                         :validation-schema="resetPasswordFormValues" 
-                        v-slot="{ errors , isSubmitting, meta: {dirty, valid}}"
+                        v-slot="{  isSubmitting, meta: {dirty, valid}}"
                     >
                     <div class="field__content">
-                        <InputField name="token" type="email" placeholder="Token" :error="errors" />                        
-                        <InputField name="email" type="email" placeholder="Email" :error="errors" />                        
-                        <InputField name="password" type="password" placeholder="Password" :error="errors" />                        
+                        <InputField name="token" type="email" placeholder="Token" />                        
+                        <InputField name="email" type="email" placeholder="Email" />                        
+                        <InputField name="password" type="password" placeholder="Password" />                        
                     </div>
                     <div class="field">
                         <button class="btn"  :disabled="!(dirty && valid) || isSubmitting" v-if="!isSubmitting">Reset</button>
