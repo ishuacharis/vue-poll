@@ -16,19 +16,22 @@ export const authAction = {
         }
     },
 
-    logout({dispatch, commit }, {  type, credentials }) {
+    async logout({dispatch, commit }, {  type, credentials }) {
         let action = type.split("/")[1];
-        
-        dispatch({ type: "loading", credentials: true }, { root: true });
-        
-        return logout(credentials).then(() => {
-            
-            commit({type: action,});
-            
+
+        try {
+            dispatch({ type: "loading", credentials: true }, { root: true });
+            const { response: {  message } } = await logout(credentials);
+            console.log(message)
+            commit({type: action, credentials: message });
+            commit({type: USER,credentials: null});
+            commit({type: TOKEN,credentials: null});
+            commit({type: LOGGEDIN,credentials: false});
+                
             dispatch({ type: "loading", credentials: false }, { root: true });
-        }).catch(() => {
-            
+        } catch (e) {
+            dispatch({ type: "error", credentials: e.message }, { root: true });
             dispatch({ type: "loading", credentials: false }, { root: true });
-        })
+        }
     } 
 };

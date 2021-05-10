@@ -1,7 +1,7 @@
 export const authState = () => ({
     user: null,
     token: null,
-    isLogggedIn: false,
+    isLoggedIn: false,
     isAuthenticating: false,
     isLoggingOut: false
 });

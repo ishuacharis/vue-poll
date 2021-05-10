@@ -4,12 +4,10 @@ export const authMutation = {
     token: (state,{credentials}) => state.token =  credentials,
     isLoggingOut: (state,{credentials}) => state.isLoggingOut = credentials,
     isLoggedIn: (state,{credentials}) => state.isLoggedIn = credentials,
-    logout: (state) => {
-        state.user  = null;
-        state.token = null;
-        state.isLogggedIn = false,
+    logout: (state, {credentials }) => {
         state.isAuthenticating = false,
-        state.isLoggingOut = false
+        state.isLoggingOut = false,
+        state.flash =  credentials
     }
     
 }; 

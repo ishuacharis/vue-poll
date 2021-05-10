@@ -11,37 +11,38 @@
 </template>
 
 <script>
-    import { computed, ref } from 'vue';
+    import { computed, } from 'vue';
     import { getToken,  } from '@/helpers';
     import { useRouter } from 'vue-router';
     import { useStore } from 'vuex';
     import { unauth } from '@/store/auth/actions/action_creators';
     export default {
-
+ 
         name: 'Logout',
 
         setup() {
             const store  = useStore();
-            let error  = ref(null);
             const router  = useRouter();
             const token  = getToken();
+            const loggedIn =  computed(() => store.getters["auth/isLoggedIn"]);
             const goBack = () => {
                 router.back();
             }
-            const signOut =  () => {
+            const signOut =  async () => {
                 let args = {
                     endPoint: "/logout",
                     method: 'POST',
                     token: token
                 };
-                store.dispatch(unauth(args)).then(() => {
-                    router.replace('/auth')
-                }).catch((e) => {
-                    error.value = e;
-                } );
+                await store.dispatch(unauth(args))
+                
+                if(!loggedIn.value){
+                    router.replace('/');
+                }
             };
             return {
-                signOut, goBack, error,
+                signOut, goBack, 
+                error: computed(() => store.getters.error),
                 isLoading: computed(() => store.getters.loading)
             }
         }
