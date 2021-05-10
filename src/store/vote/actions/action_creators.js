@@ -5,6 +5,7 @@ import { INCREMENT_VOTE,
     SET_VOTES_LEFT,
     SET_HOUSEMATES,
     SET_USER_REMAINING_VOTES,
+    SET_TOTAL_VOTES,
     SET_USER_VOTES_LEFT } from './action_types';
 
 export const incrementVote = (amount) => ({
@@ -19,6 +20,11 @@ export const onVoteDecrement = (housemate) => ({
     type: ONVOTE_DECREMENT,
     housemate: housemate
 })
+export const setTotalVotes =  (payload) => ({
+    type: SET_TOTAL_VOTES,
+    credentials: payload
+});
+
 export const setRemainingVotes = (payload) => ({
     type: SET_REMAINING_VOTES,
     command: payload 

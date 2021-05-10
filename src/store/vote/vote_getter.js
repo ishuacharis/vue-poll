@@ -3,7 +3,7 @@ export let voteGetters = {
     
     houseMates: (state) => state.houseMates,
 
-    remainingVotes: (state) => state.remainingVotes,
+    remainingVotes: (state) => state.totalVotes,
     
-    votesLeft: (state) => state.votesLeft
+    votesLeft: (state) => state.totalVotes
 };

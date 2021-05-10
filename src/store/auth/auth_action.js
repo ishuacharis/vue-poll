@@ -1,4 +1,5 @@
 import { login, logout } from '@/routes';
+import {  setTotalVotes,  } from '../vote/actions/action_creators';
 const USER = "user";
 const TOKEN = "token";
 const LOGGEDIN = "isLoggedIn";
@@ -6,10 +7,13 @@ const LOGGEDIN = "isLoggedIn";
 export const authAction = {
     async login({ commit , dispatch }, { credentials}) {
         try{
+            dispatch({ type: "error", credentials: null }, { root: true });
             const {response : { user,token  }} = await login(credentials)
+            const {  votes } = user;
             commit({type: USER,credentials: user});
             commit({type: TOKEN,credentials: token});
             commit({type: LOGGEDIN,credentials: true});
+            dispatch(setTotalVotes(votes), { root: true });
         } catch(e) {
 
             dispatch({ type: "error", credentials: e.message }, { root: true });

@@ -9,10 +9,11 @@ export const voteActions  = {
             amount: payload.amount
         })
     },
-    onVoteIncrement(context, payload) {
+    onVoteIncrement({commit}, payload) {
+      
         let type =  payload.type.split('/')[1];
 
-        return context.commit({
+        return commit({
             type: type,
             housemate: payload.housemate
         })
@@ -25,25 +26,31 @@ export const voteActions  = {
             housemate: payload.housemate
         })
     },
-    setRemainingVotes(context,payload) {
-        console.log(payload)
+    setTotalVotes ({ commit }, { type, credentials }) {
+        let action = type.split("/")[1]
+        commit({
+            type: action,
+            credentials:  credentials
+        })
+    },
+    setRemainingVotes({ commit },payload) {
         let type =  payload.type.split("/")[1]
-        return context.commit({
+        commit({
             type: type,
             command: payload.command
         });
     },
-    setVotesLeft(context,{type,command}) {
+    setVotesLeft({ commit },{type,command}) {
         let action =  type.split("/")[1]
-        return context.commit({
+        return commit({
             type: action,
             command: command
         });
     },
-    setUserRemainingVotes(context,payload) {
+    setUserRemainingVotes({ commit },payload) {
         
         let type =  payload.type.split("/")[1]
-        return context.commit({
+        return commit({
             type: type,
             command: payload.command
         });

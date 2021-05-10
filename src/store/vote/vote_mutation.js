@@ -32,7 +32,12 @@ export const voteMutations = {
     setHousemates(state,payload) {
         state.houseMates = payload.credentials
     },
+    setTotalVotes(state, { credentials }) {
+
+        state.totalVotes =  credentials
+    },
     setRemainingVotes(state, payload) {
+        console.log(payload)
         if(payload.command === 'increase') state.remainingVotes -= 10;
         if(payload.command === 'decrease') state.remainingVotes += 10;
     },
@@ -42,17 +47,16 @@ export const voteMutations = {
     },
 
     setUserRemainingVotes(state, payload) {
-      
         //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
-            if(payload.command === 'increase') state.remainingVotes -= 10;
-            if(payload.command === 'decrease') state.remainingVotes += 10;
+            if(payload.command === 'increase') state.totalVotes -= 10;
+            if(payload.command === 'decrease') state.totalVotes += 10;
         //}
         
     },
     setUserVotesLeft(state, {command}){
         //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
-            if(command === 'increase')  state.votesLeft -= 10;
-            if(command === 'decrease')  state.votesLeft += 10;
+            if(command === 'increase')  state.totalVotes -= 10;
+            if(command === 'decrease')  state.totalVotes += 10;
         //}
         
     },

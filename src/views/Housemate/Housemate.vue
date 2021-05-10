@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <div v-if="error">
-        Error Component
+        {{ error }}
       </div>
     <Suspense v-else>
       <template #default>

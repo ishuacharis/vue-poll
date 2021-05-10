@@ -36,12 +36,11 @@
 </template>
 
 <script>
-  import {ref, computed, onBeforeUnmount,} from 'vue';
+  import {ref, computed,} from 'vue';
   import { useStore } from 'vuex';
   import {useRoute, useRouter} from 'vue-router';
-  import {getUser} from '@/data/data';
-  //import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
-  import routes from '@/routes';
+  import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
+  import { vote } from '@/routes';
   import { getToken , info} from '@/helpers';
   import MyVote from '@/components/MyVote/MyVote.vue';
   import { setUserRemainingVotes, setUserVotesLeft } from '../../store/vote/actions/action_creators';
@@ -53,14 +52,19 @@
       MyVote
     },
      async setup() { 
-      const totalvotes = ref(0);
-      const store = useStore();
-      const router  = useRouter();
-      const { vote } = routes();
+       const store = useStore();
+       const router  = useRouter();
+      const totalvotes =  computed(() => store.getters["votes/totalVotes"]).value;
+   
+        const votesLeft =  computed(() => store.getters["votes/votesLeft"]);
+      // onBeforeUnmount(() => {
+      //   alert("Are you want to leave")
+      // })
 
-      onBeforeUnmount(() => {
-        alert("Are you want to leave")
-      })
+      const getUser = async (user) => {
+        const housemates =  computed(() => store.getters["votes/houseMates"]).value;
+        return housemates.find(housemate => housemate.screen_name === user)
+      }
 
       const {params : {screen_name}} = useRoute()
       const housemate = ref(await getUser(screen_name))
@@ -71,14 +75,15 @@
       const { id }  = info()
 
       const onVoteIncre = () => {
-        if(store.state.votes.votesLeft > 0 && store.state.votes.votesLeft <= 100){ 
-
+        console.log(votesLeft.value)
+        if(votesLeft.value > 0 && votesLeft.value <= totalvotes){ 
+          
           voteCount.value += 10;
           store.dispatch(setUserRemainingVotes('increase'))
-          store.dispatch(setUserVotesLeft('increase'))
+          //store.dispatch(setUserVotesLeft('increase'))
 
         }
-        //store.dispatch(onVoteIncrement(user.value))
+        store.dispatch(onVoteIncrement(housemate.value))
       }
       const onVoteDecre = ()  => {
         if(store.state.votes.votesLeft >= 0 && store.state.votes.votesLeft < 100) {
@@ -87,7 +92,7 @@
           store.dispatch(setUserRemainingVotes('decrease'))
           store.dispatch(setUserVotesLeft('decrease'))
         }
-        //store.dispatch(onVoteDecrement(user.value))
+        store.dispatch(onVoteDecrement(housemate.value))
       }
 
            
