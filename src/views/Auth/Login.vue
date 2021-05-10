@@ -36,23 +36,22 @@
 </template>
  
 <script>
-  import { ref } from 'vue';
+  import {  computed } from 'vue';
   import { useRouter} from  'vue-router';
   import { useStore } from 'vuex';
   import {Form,} from  'vee-validate';
   import InputField from '@/components/shared/InputField';
   import {  loginSchema , loginFormValues} from '@/schema';
-  import routes from '@/routes';
   import { auth } from '@/store/auth/actions/action_creators';
   export default {
     components: {Form,InputField,},
     name: 'Login',
     setup(){ 
-      const error = ref(null);
-      const {login} = routes();
+   
       
       const router = useRouter();
       const store =  useStore() ;
+      const loggedIn =  computed(() => store.getters["auth/isLoggedIn"])
       
       const onFormSubmit = async (values, {resetForm}) => {
         const data = {
@@ -63,27 +62,20 @@
           "endPoint": "/login",
           "method":  "POST",
           "body":  data
-          };
-          
-        try {
-          const response = await login(args)
-          if('response' in response) {
-            store.dispatch(auth(response["response"]))
-            resetForm()
+        };
+
+         await store.dispatch(auth(args))
+          if(loggedIn.value) {
             router.replace('/');
+            resetForm()
           }
-        } catch (e) {
-          error.value = e.message;
-        }
-
       }
-
       
       return {
         loginSchema, 
         onFormSubmit,
         loginFormValues,
-        error
+        error: computed(() => store.getters.error )
       }
     }
   }

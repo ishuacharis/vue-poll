@@ -4,4 +4,6 @@ export let getters  = {
     todos: (state) => state.todos,
     
     loading: (state) => state.isLoading,
+
+    error: (state) => state.error,
 }

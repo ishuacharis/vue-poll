@@ -9,6 +9,7 @@ export default function() {
     };
 
     const connect = async (args) => {
+      
         const endPoint  = args["endPoint"];
         const body =  args["body"];
         const method = args["method"];
@@ -23,9 +24,9 @@ export default function() {
         }
         const response = await fetch(uri,options)
         if ( !response.ok ) {
-            const error = await response.json();
+            const { response: { message } } = await response.json();
             
-            throw new Error(error['response']['message']);
+            throw new Error(message);
         }
 
         return await response.json();
@@ -81,9 +82,9 @@ export default function() {
         }
         const response = await fetch(uri,options)
         if ( !response.ok ) {
-            const error = await response.json();
+            const {response : { message }} = await response.json();
             
-            throw new Error(error['response']['message']);
+            throw new Error(message);
         }
 
         return await response.json();

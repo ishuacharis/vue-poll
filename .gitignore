@@ -25,3 +25,5 @@ pnpm-debug.log*
 *.sw?
 
 src/plugins
+cypress/
+cypress.json

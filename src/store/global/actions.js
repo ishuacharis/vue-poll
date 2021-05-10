@@ -11,7 +11,12 @@ export let actions = {
             type: type,
             credentials: credentials
         })
-    }
-
+    },
+    error({ commit }, { type, credentials }) {   
+        commit({
+            type: type,
+            credentials: credentials
+        })
+    },
 }
 

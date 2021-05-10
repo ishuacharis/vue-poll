@@ -1,23 +1,20 @@
 import routes from '@/routes';
-const { logout } = routes();
+const { logout, login } = routes();
 const USER = "user";
 const TOKEN = "token";
 const LOGGEDIN = "isLoggedIn";
 
 export const authAction = {
-    login({ commit  }, { credentials: { user, token } }) {
-        commit({
-            type: USER,
-            credentials: user
-        })
-        commit({
-            type: TOKEN,
-            credentials: token
-        })
-        commit({
-            type: LOGGEDIN,
-            credentials: true
-        })
+    async login({ commit , dispatch }, { credentials}) {
+        try{
+            const {response : { user,token  }} = await login(credentials)
+            commit({type: USER,credentials: user});
+            commit({type: TOKEN,credentials: token});
+            commit({type: LOGGEDIN,credentials: true});
+        } catch(e) {
+
+            dispatch({ type: "error", credentials: e.message }, { root: true });
+        }
     },
 
     logout({dispatch, commit }, {  type, credentials }) {
