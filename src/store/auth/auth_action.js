@@ -1,5 +1,4 @@
-import routes from '@/routes';
-const { logout, login } = routes();
+import { login, logout } from '@/routes';
 const USER = "user";
 const TOKEN = "token";
 const LOGGEDIN = "isLoggedIn";

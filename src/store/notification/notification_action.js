@@ -1,5 +1,5 @@
-import routes from '@/routes';
-const { notifications } = routes();
+import { notifications } from '@/routes';
+
 
 export const notificationAction = {
     async setNotifications ({ commit, dispatch, state }, { type, credentials }) {

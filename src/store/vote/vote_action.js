@@ -1,5 +1,4 @@
-import routes from '@/routes';
-const { eviction } = routes();
+import { eviction } from '@/routes';
 
 export const voteActions  = {
 

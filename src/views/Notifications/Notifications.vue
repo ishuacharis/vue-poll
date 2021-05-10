@@ -6,7 +6,12 @@
                 <div class="loading"></div>
             </div>
         </template>
-        <template v-if="!isLoading">
+        <template v-if="error">
+            <div class="loading-container">
+                <div class="error"> {{ error }} </div>
+            </div>
+        </template>
+        <template v-if="!isLoading && !error">
 
             <Notification v-for="notification in notificationsObject"  
             :key="notification.id"
@@ -63,7 +68,8 @@
             return  {
                 userNotifications,
                 notificationsObject: computed(() => store.getters["notification/notifications"]),
-                isLoading: computed(() => store.getters.loading)
+                isLoading: computed(() => store.getters.loading),
+                error: computed(() => store.getters.error)
             }
         }
         
