@@ -56,17 +56,25 @@ export const voteActions  = {
             command: command
         });
     },
-    async setHousemates({dispatch, commit },{ type,credentials }) {
-
-        dispatch({type: 'loading', credentials: true}, {root: true });
-        
+    async setHousemates({dispatch, commit, state },{ type,credentials }) {
         let action =  type.split("/")[1];
-        const {response: { data } } = await eviction(credentials);
+
+        if(!state.houseMates) {
+            dispatch({type: 'loading', credentials: true}, {root: true });
+        
+            const {response: { data } } = await eviction(credentials);
+            commit({
+                type: action,
+                credentials: data
+            });
+            dispatch({type: 'loading', credentials: false}, {root: true });
+        }
+
         commit({
             type: action,
-            credentials: data
-        });
-        dispatch({type: 'loading', credentials: false}, {root: true });
+            credentials: state.houseMates
+        })
+        
     }
 
 }; 
