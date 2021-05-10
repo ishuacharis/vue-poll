@@ -5,8 +5,6 @@ export const notificationAction = {
     async setNotifications ({ commit, dispatch, state }, { type, credentials }) {
         let action = type.split("/")[1];
         if(!state.notifications){
-
-
             try {
                 dispatch({ type: "loading", credentials: true }, { root: true });
                 const { response: {  notifications: { data }} } = await notifications(credentials);
@@ -20,7 +18,8 @@ export const notificationAction = {
                 dispatch({ type: "loading", credentials: false }, { root: true });
             }
         }else{
-            commit({
+            dispatch({ type: "error", credentials: null }, { root: true });
+            return commit({
                 type: action,
                 credentials: state.notifications
             })

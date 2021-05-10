@@ -54,8 +54,16 @@ export const logout = async (args) =>  {
     
 export const notifications =  async (args) => {
         const endPoint  = args["endPoint"];
+        const method = args["method"];
+        const token  = args['token'] || '';
+        const authorization = token ?  `Bearer ${token}` : '' ;
+        headers["headers"]["Authorization"] = authorization;
         const uri = BASE_URI+endPoint; 
-        const response = await fetch(uri)
+        const options = {
+            method: method,
+            headers: headers["headers"],
+        }
+        const response = await fetch(uri,options)
         if ( !response.ok ) {
             const { response: { message } } = await response.json();
             
@@ -82,8 +90,7 @@ export const eviction = async (args) => {
         }
         const response = await fetch(uri,options)
         if ( !response.ok ) {
-            const {response : { message }} = await response.json();
-            
+            const { response: { message} } = await response.json();           
             throw new Error(message);
         }
 

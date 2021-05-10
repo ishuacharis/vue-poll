@@ -1,6 +1,6 @@
 <template lang="html">
     
-    <div class="notifications" v-if="notificationsObject">
+    <div class="notifications">
         <template v-if="isLoading">
             <div class="loading-container">
                 <div class="loading"></div>
@@ -26,7 +26,7 @@
     import { pusherClient } from '@/Context/PusherContext';
     import { computed, onMounted, ref} from 'vue';
     import Notification from '@/components/Notification/Notification';
-    import { info } from '@/helpers';
+    import { getToken, info } from '@/helpers';
     import { useStore } from 'vuex';
     import { notifications } from '@/store/notification/actions/action_creators.js';
     export default {
@@ -39,9 +39,11 @@
             const { id } =  info();
             const count  = ref(10)
             const store  = useStore();
+            const token = getToken()
             let args = {
                 endPoint: `/notifications/${id}`,
                 method: 'GET',
+                token: token
             }
             const userNotifications = async () => {
                 await store.dispatch(notifications(args));

@@ -72,12 +72,14 @@ export const voteActions  = {
                 dispatch({type: 'error', credentials: e.message}, {root: true });
             }
             dispatch({type: 'loading', credentials: false}, {root: true });
+        } else{
+            dispatch({type: 'error', credentials: null}, {root: true });
+            commit({
+                type: action,
+                credentials: state.houseMates
+            })
         }
 
-        commit({
-            type: action,
-            credentials: state.houseMates
-        })
         
     }
 
