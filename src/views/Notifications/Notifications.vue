@@ -8,7 +8,7 @@
         </template>
         <template v-if="!isLoading">
 
-            <Notification v-for="notification in notificationsObject.data"  
+            <Notification v-for="notification in notificationsObject"  
             :key="notification.id"
             :notification ="notification" 
             />
@@ -19,31 +19,27 @@
 
 <script>
     import { pusherClient } from '@/Context/PusherContext';
-    import { onMounted, reactive, ref} from 'vue';
-    import routes from '@/routes';
+    import { computed, onMounted, ref} from 'vue';
     import Notification from '@/components/Notification/Notification';
     import { info } from '@/helpers';
+    import { useStore } from 'vuex';
+    import { notifications } from '@/store/notification/actions/action_creators.js';
     export default {
         name: 'Notifications',
         components: {
             Notification
         },
         setup() {
-            const { notifications } = routes();
-            const notificationsObject = reactive({});
-            const isLoading = ref(true);
+     
             const { id } =  info();
             const count  = ref(10)
-            
+            const store  = useStore();
             let args = {
                 endPoint: `/notifications/${id}`,
                 method: 'GET',
             }
             const userNotifications = async () => {
-                const { response:{ message:m, notifications:{ data} } } = await notifications(args);
-                notificationsObject.message = m
-                notificationsObject.data = data
-                isLoading.value = false
+                await store.dispatch(notifications(args));
             }
             onMounted(() => {
                 userNotifications()
@@ -65,8 +61,9 @@
                 }
             }
             return  {
-                
-                userNotifications,notificationsObject, isLoading
+                userNotifications,
+                notificationsObject: computed(() => store.getters["notification/notifications"]),
+                isLoading: computed(() => store.getters.loading)
             }
         }
         

@@ -6,6 +6,7 @@ import { mutations } from './global/mutations';
 import { state } from './global/state'
 import voteModule from './vote';
 import authModule from './auth';
+import notificationModule from './notification';
 
 const store = createStore({
   state: state,
@@ -14,7 +15,8 @@ const store = createStore({
   actions: actions,
   modules: {
     votes: voteModule,
-    auth: authModule
+    auth: authModule,
+    notification: notificationModule
   },
   plugins: [createPersistedState()]
 })
