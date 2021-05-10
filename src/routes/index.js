@@ -1,5 +1,4 @@
-export default function() {
-    
+  
     const BASE_URI = "http://localhost:8000/api";
     const headers = {
         headers: {
@@ -32,44 +31,45 @@ export default function() {
         return await response.json();
     };
 
-    const login = async (args) => {
+export  const login = async (args) => {
         return await connect(args);
     };
 
-    const register = async (args) => {
+export  const register = async (args) => {
         return await connect(args);
     };
 
-    const forgotPassword = async (args) => {
+export const forgotPassword = async (args) => {
         return await connect(args);
        
     };
 
-    const resetPassword = async (args) => {
+export const resetPassword = async (args) => {
         return await connect(args);
     };
 
-    const logout = async (args) =>  {
+export const logout = async (args) =>  {
         return await connect(args);
     };
-    const notifications =  async (args) => {
+    
+export const notifications =  async (args) => {
         const endPoint  = args["endPoint"];
         const uri = BASE_URI+endPoint; 
         const response = await fetch(uri)
         if ( !response.ok ) {
-            const error = await response.json();
+            const { response: { message } } = await response.json();
             
-            throw new Error(error['response']['message']);
+            throw new Error(message);
         }
 
         return await response.json();
     };
 
-    const vote = async (args) => {
+export const vote = async (args) => {
         return await connect(args);
     };
 
-    const eviction = async (args) => {
+export const eviction = async (args) => {
         const endPoint  = args["endPoint"];
         const method = args["method"];
         const token  = args['token'] || '';
@@ -89,15 +89,3 @@ export default function() {
 
         return await response.json();
     };
-
-    return {
-        login,
-        register, 
-        logout,
-        forgotPassword, 
-        resetPassword,
-        notifications,
-        vote,
-        eviction
-    }
-}
