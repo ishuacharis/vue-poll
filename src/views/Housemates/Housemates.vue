@@ -1,7 +1,10 @@
 <template lang="html">
-  <HousemateList :houseMates="houseMatesObj" v-if="!isLoading" />
+  <HousemateList :houseMates="houseMatesObj" v-if="!isLoading && !error" />
   <div v-if="isLoading" class="loading-container">
     <div class="loading"></div>
+  </div>
+  <div v-if="error" class="loading-container">
+    <div class="error"> {{ error }} </div>
   </div>
 </template>
 
@@ -39,6 +42,7 @@
     return {
       storeAsync,
       houseMatesObj: computed(() => store.getters["votes/houseMates"]),
+      error: computed(() => store.getters.error),
       isLoading: computed(() => store.getters.loading)
     }
   }

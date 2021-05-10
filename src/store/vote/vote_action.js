@@ -62,11 +62,16 @@ export const voteActions  = {
         if(!state.houseMates) {
             dispatch({type: 'loading', credentials: true}, {root: true });
         
-            const {response: { data } } = await eviction(credentials);
-            commit({
-                type: action,
-                credentials: data
-            });
+            try {
+                const {response: { data } } = await eviction(credentials);
+                commit({
+                    type: action,
+                    credentials: data
+                });
+
+            } catch (e) {
+                dispatch({type: 'error', credentials: e.message}, {root: true });
+            }
             dispatch({type: 'loading', credentials: false}, {root: true });
         }
 
