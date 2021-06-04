@@ -39,8 +39,7 @@
   import {ref, computed,} from 'vue';
   import { useStore } from 'vuex';
   import {useRoute, useRouter} from 'vue-router';
-  import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
-  
+   
   import { getToken , info} from '@/helpers';
   import MyVote from '@/components/MyVote/MyVote.vue';
   import { setUserRemainingVotes, setUserVotesLeft, updateHouseMatesVote } from '../../store/vote/actions/action_creators';
@@ -58,6 +57,7 @@
       const totalvotes =  computed(() => store.getters["votes/totalVotes"]).value;
       const loading  = computed(() => store.getters.loading)
       const votesLeft =  computed(() => store.getters["votes/votesLeft"]);
+
       // onBeforeUnmount(() => {
       //   alert("Are you want to leave")
       // })
@@ -85,17 +85,16 @@
           store.dispatch(setUserVotesLeft(housemate))
 
         }
-        store.dispatch(onVoteIncrement(housemate.value))
       }
       const onVoteDecre = ()  => {
-        if(store.state.votes.votesLeft >= 0 && store.state.votes.votesLeft < 100) {
+        if(housemate.value.voteCount > 0) {
 
           housemate.value.voteCount -= 10
           store.dispatch(setUserRemainingVotes('decrease'))
           store.dispatch(setUserVotesLeft(housemate))
 
         }
-        store.dispatch(onVoteDecrement(housemate.value))
+
       }
 
       const submit  = async () => {
