@@ -1,4 +1,4 @@
-import { eviction } from '@/routes';
+import { eviction, vote } from '@/routes';
 
 export const voteActions  = {
 
@@ -86,8 +86,28 @@ export const voteActions  = {
                 credentials: state.houseMates
             })
         }
-
+    },
         
+    async updateHouseMatesVote({ dispatch, commit }, { type, credentials }) {
+        let action =  type.split("/")[1];
+        const {  body  }  = credentials;
+        dispatch({ type: 'loading', credentials: true }, { root: true });
+
+        try {
+            
+            const { response: { success } } = await vote(credentials);
+            console.log(success);
+
+            commit({
+                type: action,
+                credentials: body,
+            })
+            dispatch({ type: 'loading', credentials: false }, { root: true });
+
+        } catch (e) {
+            dispatch({ type: 'error', credentials: e.message}, {root: true })
+            dispatch({ type: 'loading', credentials: false }, { root: true });
+        }
     }
 
 }; 
