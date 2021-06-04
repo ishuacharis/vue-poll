@@ -6,7 +6,8 @@ import { INCREMENT_VOTE,
     SET_HOUSEMATES,
     SET_USER_REMAINING_VOTES,
     SET_TOTAL_VOTES,
-    SET_USER_VOTES_LEFT } from './action_types';
+    SET_USER_VOTES_LEFT,
+    UPDATE_HOUSEMATES_VOTES } from './action_types';
 
 export const incrementVote = (amount) => ({
     type: INCREMENT_VOTE,
@@ -48,3 +49,8 @@ export const setHousemates = (payload) => ({
     type: SET_HOUSEMATES,
     credentials: payload
 })
+
+export const updateHouseMatesVote = (payload) => ({
+    type: UPDATE_HOUSEMATES_VOTES,
+    credentials: payload
+});
