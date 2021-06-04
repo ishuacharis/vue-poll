@@ -47,17 +47,22 @@ export const voteMutations = {
     },
 
     setUserRemainingVotes(state, payload) {
-        //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
-            if(payload.command === 'increase') state.totalVotes -= 10;
-            if(payload.command === 'decrease') state.totalVotes += 10;
-        //}
-        
+        if(payload.command === 'increase') state.totalVotes -= 10;
+        if(payload.command === 'decrease') state.totalVotes += 10;
     },
     setUserVotesLeft(state, {command}){
-        //if(state.votesLeft > 0 && state.votesLeft <= 100){ 
-            if(command === 'increase')  state.totalVotes -= 10;
-            if(command === 'decrease')  state.totalVotes += 10;
-        //}
-        
+        state.houseMates.map(houseMate => {
+            if(houseMate.screen_name == command.screen_name) {
+                houseMate = command
+            }
+        })
     },
+
+    updateHouseMatesVote(state, { credentials: { housemate_id } } ) {
+        state.houseMates.map(houseMate => {
+            if(houseMate.id == housemate_id ) {
+                houseMate.voteCount = 0
+            }
+        })
+    }
 };
