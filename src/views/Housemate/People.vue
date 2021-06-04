@@ -18,7 +18,7 @@
               <span>+</span>
             </div>
             <div class="control">
-              <input type="text" :value="voteCount" disabled  />
+              <input type="text" :value= housemate.voteCount disabled  />
             </div>
             <div class="control" @click="onVoteDecre">
               <span>-</span>
@@ -26,8 +26,8 @@
           </div>
           <div class="buttons">
             <router-link class="btn btn-primary" :to="{name: 'Housemates'}">Back</router-link>
-            <button type="submit" class="btn btn-primary" @click="submit" v-if="!isLoading">Cast Vote</button>
-            <div v-if="isLoading" class="loading"></div>
+            <button type="submit" class="btn btn-primary" @click="submit" v-if="!loading">Cast Vote</button>
+            <div v-if="loading" class="loading"></div>
           </div>
         </div>
       </div>
@@ -40,70 +40,70 @@
   import { useStore } from 'vuex';
   import {useRoute, useRouter} from 'vue-router';
   import { onVoteIncrement, onVoteDecrement } from '@/store/vote/actions/action_creators';
-  import { vote } from '@/routes';
+  
   import { getToken , info} from '@/helpers';
   import MyVote from '@/components/MyVote/MyVote.vue';
-  import { setUserRemainingVotes, setUserVotesLeft } from '../../store/vote/actions/action_creators';
+  import { setUserRemainingVotes, setUserVotesLeft, updateHouseMatesVote } from '../../store/vote/actions/action_creators';
 
   export default {
     name: 'People',
-    inject: ['VoteContext'],
+    //inject: ['VoteContext'],
     components: {
       MyVote
     },
      async setup() { 
-       const store = useStore();
-       const router  = useRouter();
+      
+      const store = useStore();
+      const router  = useRouter();
       const totalvotes =  computed(() => store.getters["votes/totalVotes"]).value;
-   
-        const votesLeft =  computed(() => store.getters["votes/votesLeft"]);
+      const loading  = computed(() => store.getters.loading)
+      const votesLeft =  computed(() => store.getters["votes/votesLeft"]);
       // onBeforeUnmount(() => {
       //   alert("Are you want to leave")
       // })
 
       const getUser = async (user) => {
         const housemates =  computed(() => store.getters["votes/houseMates"]).value;
+       
         return housemates.find(housemate => housemate.screen_name === user)
       }
 
       const {params : {screen_name}} = useRoute()
       const housemate = ref(await getUser(screen_name))
-      const isLoading  = ref(false)
-      
-      const voteCount =  ref(0)
+
+      housemate.value.voteCount ??= 0
+
       const token  = getToken()
       const { id }  = info()
 
       const onVoteIncre = () => {
-        console.log(votesLeft.value)
+      
         if(votesLeft.value > 0 && votesLeft.value <= totalvotes){ 
-          
-          voteCount.value += 10;
+
+          housemate.value.voteCount += 10
           store.dispatch(setUserRemainingVotes('increase'))
-          //store.dispatch(setUserVotesLeft('increase'))
+          store.dispatch(setUserVotesLeft(housemate))
 
         }
         store.dispatch(onVoteIncrement(housemate.value))
       }
       const onVoteDecre = ()  => {
         if(store.state.votes.votesLeft >= 0 && store.state.votes.votesLeft < 100) {
-          
-          voteCount.value -= 10;
+
+          housemate.value.voteCount -= 10
           store.dispatch(setUserRemainingVotes('decrease'))
-          store.dispatch(setUserVotesLeft('decrease'))
+          store.dispatch(setUserVotesLeft(housemate))
+
         }
         store.dispatch(onVoteDecrement(housemate.value))
       }
 
-           
-
       const submit  = async () => {
-        isLoading.value = true
         const data = {
           user_id: id,
           housemate_id: housemate.value.id,
           platform_id: 1,
-          amount: voteCount.value,
+          amount:  housemate.value.voteCount,
         };
         const args = {
           endPoint: "/vote",
@@ -111,22 +111,11 @@
           body: data,
           token: token
         };
-
-        try {
-          const response  =  await vote(args);
-          if ("response" in  response) {
-              isLoading.value = false
-              router.replace("/")
-          }
-        } catch (e) {
-          isLoading.value = false
-          console.error({
-            error: e.message
-          });
+        await store.dispatch(updateHouseMatesVote(args,))
+        if(!loading.value) {
+          router.replace("/")
         }
       }
-
-    
       
       return  {
         housemate,
@@ -134,8 +123,7 @@
         remainingvotes: computed(() => store.getters['votes/remainingVotes']),
         onVoteIncre,
         onVoteDecre,
-        voteCount,
-        isLoading,
+        loading,
         submit
       }
     }
