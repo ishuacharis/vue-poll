@@ -2,51 +2,6 @@ import { eviction, vote } from '@/routes';
 
 export const voteActions  = {
 
-    incrementVote(context,payload){
-        let type =  payload.type.split("/")[1]
-        return context.commit({
-            type: type,
-            amount: payload.amount
-        })
-    },
-    onVoteIncrement({commit}, payload) {
-      
-        let type =  payload.type.split('/')[1];
-
-        return commit({
-            type: type,
-            housemate: payload.housemate
-        })
-    },
-    onVoteDecrement(context, payload) {
-        let type =  payload.type.split('/')[1];
-
-        return context.commit({
-            type: type,
-            housemate: payload.housemate
-        })
-    },
-    setTotalVotes ({ commit }, { type, credentials }) {
-        let action = type.split("/")[1]
-        commit({
-            type: action,
-            credentials:  credentials
-        })
-    },
-    setRemainingVotes({ commit },payload) {
-        let type =  payload.type.split("/")[1]
-        commit({
-            type: type,
-            command: payload.command
-        });
-    },
-    setVotesLeft({ commit },{type,command}) {
-        let action =  type.split("/")[1]
-        return commit({
-            type: action,
-            command: command
-        });
-    },
     setUserRemainingVotes({ commit },payload) {
         
         let type =  payload.type.split("/")[1]
@@ -62,6 +17,7 @@ export const voteActions  = {
             command: command
         });
     },
+    
     async setHousemates({dispatch, commit, state },{ type,credentials }) {
         let action =  type.split("/")[1];
 
