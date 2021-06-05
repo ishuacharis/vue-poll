@@ -5,19 +5,19 @@ export const voteMutations = {
         state.totalVotes = credentials;
     },
 
-    setHousemates(state,payload) {
-        state.houseMates = payload.credentials
+    setHousemates(state,{ credentials }) {
+        state.houseMates = credentials
     },
 
-    setUserRemainingVotes(state, payload) {
-            if(payload.command === 'increase') state.totalVotes -= 10;
-            if(payload.command === 'decrease') state.totalVotes += 10;
+    setUserRemainingVotes(state, { credentials }) {
+            if(credentials === 'increase') state.totalVotes -= 10;
+            if(credentials === 'decrease') state.totalVotes += 10;
     },
 
-    setUserVotesLeft(state, {command}){
+    setUserVotesLeft(state, { credentials }){
         state.houseMates.map(houseMate => {
-            if(houseMate.screen_name == command.screen_name) {
-                houseMate = command
+            if(houseMate.screen_name == credentials.screen_name) {
+                houseMate = credentials
             }
         })
     },

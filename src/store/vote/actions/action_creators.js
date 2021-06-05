@@ -14,22 +14,22 @@ export const setTotalVotes = (payload) => ({
 
 export const setUserRemainingVotes = (payload) => ({
     type: SET_USER_REMAINING_VOTES,
-    command: payload 
+    payload: payload 
 });
 
 export const setUserVotesLeft = (payload) => ({
     type: SET_USER_VOTES_LEFT,
-    command: payload
+    payload: payload
 });
 
 export const setHousemates = (payload) => ({
     type: SET_HOUSEMATES,
-    credentials: payload
+    payload: payload
 });
 
 export const updateHouseMatesVote = (payload) => ({
     type: UPDATE_HOUSEMATES_VOTES,
-    credentials: payload
+    payload: payload
 });
 
 export const clearAll = () => ({

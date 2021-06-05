@@ -2,7 +2,7 @@ import { eviction, vote } from '@/routes';
 
 export const voteActions  = {
 
-    setTotalVotes({ commit }, {type, payload}) {
+    setTotalVotes({ commit }, { type, payload }) {
         let action =  type.split("/")[1]
         commit({
             type: action,
@@ -10,30 +10,32 @@ export const voteActions  = {
         });
     },
 
-    setUserRemainingVotes({ commit },payload) {
+    setUserRemainingVotes({ commit },{type, payload}) {
         
-        let type =  payload.type.split("/")[1]
+        let action =  type.split("/")[1];
+
         return commit({
-            type: type,
-            command: payload.command
-        });
-    },
-    setUserVotesLeft(context,{type,command}) {
-        let action =  type.split("/")[1]
-        return context.commit({
             type: action,
-            command: command
+            credentials: payload
         });
     },
     
-    async setHousemates({dispatch, commit, state },{ type,credentials }) {
+    setUserVotesLeft({ commit }, { type,payload }) {
+        let action =  type.split("/")[1]
+        return commit({
+            type: action,
+            credentials: payload
+        });
+    },
+    
+    async setHousemates({dispatch, commit, state },{ type,payload }) {
         let action =  type.split("/")[1];
 
         if(!state.houseMates) {
             dispatch({type: 'loading', credentials: true}, {root: true });
         
             try {
-                const {response: { data } } = await eviction(credentials);
+                const {response: { data } } = await eviction(payload);
                 commit({
                     type: action,
                     credentials: data
@@ -52,14 +54,14 @@ export const voteActions  = {
         }
     },
         
-    async updateHouseMatesVote({ dispatch, commit }, { type, credentials }) {
+    async updateHouseMatesVote({ dispatch, commit }, { type, payload }) {
         let action =  type.split("/")[1];
-        const {  body  }  = credentials;
+        const {  body  }  = payload;
         dispatch({ type: 'loading', credentials: true }, { root: true });
 
         try {
             
-            const { response: { success } } = await vote(credentials);
+            const { response: { success } } = await vote(payload);
             console.log(success);
 
             commit({
