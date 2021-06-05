@@ -2,6 +2,14 @@ import { eviction, vote } from '@/routes';
 
 export const voteActions  = {
 
+    setTotalVotes({ commit }, {type, payload}) {
+        let action =  type.split("/")[1]
+        commit({
+            type: action,
+            credentials: payload
+        });
+    },
+
     setUserRemainingVotes({ commit },payload) {
         
         let type =  payload.type.split("/")[1]
@@ -64,6 +72,13 @@ export const voteActions  = {
             dispatch({ type: 'error', credentials: e.message}, {root: true })
             dispatch({ type: 'loading', credentials: false }, { root: true });
         }
+    },
+
+    clearAll({ commit }, { type }) {
+        let action =  type.split("/")[1];
+        commit({
+            type:  action,
+        })
     }
 
 }; 

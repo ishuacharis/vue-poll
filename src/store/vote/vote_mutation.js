@@ -1,5 +1,9 @@
 
 export const voteMutations = {
+    
+    setTotalVotes(state,{ credentials }) {
+        state.totalVotes = credentials;
+    },
 
     setHousemates(state,payload) {
         state.houseMates = payload.credentials
@@ -26,5 +30,10 @@ export const voteMutations = {
                 houseMate.voteCount = 0
             }
         })
+    },
+
+    clearAll(state) {
+        state.totalVotes = null;
+        state.houseMates = null
     }
 };
