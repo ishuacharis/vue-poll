@@ -15,10 +15,6 @@ const Notifications = () => import('@/views/Notifications/Notifications.vue');
 const Messages = () => import('@/views/Messages/Messages.vue');
 const Profile = () => import('@/views/Profile/Profile.vue');
 
-
-
-
-
 const routes = [
   {
     path: '/',
@@ -113,11 +109,11 @@ const routes = [
     name: 'NotFound',
     component: NotFound
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;
