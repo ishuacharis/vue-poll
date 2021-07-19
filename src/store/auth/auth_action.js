@@ -9,7 +9,7 @@ export const authAction = {
         try{
             dispatch({ type: "error", credentials: null }, { root: true });
             const {response : { user,token  }} = await login(credentials)
-            const {  votes } = user;
+            const { votes } = user;
             commit({type: USER,credentials: user});
             commit({type: TOKEN,credentials: token});
             commit({type: LOGGEDIN,credentials: true});

@@ -13,5 +13,5 @@ export const housemates = () => {
 };
 
 export const info = () => {    
-  return store.getters['auth/user'] ;
+  return store.getters['auth/user'];
 };
