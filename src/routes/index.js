@@ -46,6 +46,10 @@ export const resetPassword = async (args) => {
 export const logout = async (args) =>  {
   return await connect(args);
 };
+
+export const updateProfile = async (args) => {
+  return await connect(args);
+};
     
 export const notifications =  async (args) => {
   const endPoint  = args["endPoint"];

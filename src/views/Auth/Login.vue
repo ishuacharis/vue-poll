@@ -36,15 +36,15 @@
 </template>
  
 <script>
-  import {  computed } from 'vue';
-  import { useRouter} from  'vue-router';
+  import { computed } from 'vue';
+  import { useRouter } from  'vue-router';
   import { useStore } from 'vuex';
-  import {Form,} from  'vee-validate';
+  import { Form, } from  'vee-validate';
   import InputField from '@/components/shared/InputField';
-  import {  loginSchema , loginFormValues} from '@/schema';
+  import { loginSchema , loginFormValues } from '@/schema';
   import { auth } from '@/store/auth/actions/action_creators';
   export default {
-    components: {Form,InputField,},
+    components: { Form, InputField,},
     name: 'Login',
     setup(){ 
    

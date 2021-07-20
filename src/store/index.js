@@ -16,10 +16,9 @@ const store = createStore({
   modules: {
     votes: voteModule,
     auth: authModule,
-    notification: notificationModule
+    notification: notificationModule,
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState()],
 })
 
-
-export default store
+export default store;
